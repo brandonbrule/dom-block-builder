@@ -11,7 +11,8 @@ html {
 
 body {
   margin: 0;
-  font-size: 1em; }
+  font-size: 1em;
+  background: #fff; }
 
 header {
   padding: 1.5rem;

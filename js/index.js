@@ -20,7 +20,6 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   
   // col-container
   col_container.setAttribute('class', 'col-container');
-  col_container.style.background = '#abc';
   col_container.style.width = container_width + '%';
 
 
@@ -36,7 +35,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
     col.style.padding = '20px 0 0 0'
     col.style.float = 'left';
     col.style.height = int_block_height + 'px';
-    col.style.background = '#333';
+    col.style.background = '#111';
     
     col_container.appendChild(col);
   }
