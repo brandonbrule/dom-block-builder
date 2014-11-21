@@ -1,0 +1,41 @@
+.clearfix:after, .col-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container {
+  max-width: 800px;
+  background-color: #abc;
+  margin: 5% auto;
+}
+
+.clearall {
+  position: fixed;
+  top: 10px;
+  padding: 5px;
+  right: 10px;
+  z-index: 100;
+}
+
+.col-2 {
+  background: #333;
+  min-height: 100px;
+  float: left;
+  width: 47.5%;
+  margin-left: 5%;
+}
+.col-2:first-child {
+  margin-left: 0;
+}
+
+.col-3 {
+  background: #333;
+  min-height: 100px;
+  float: left;
+  width: 32%;
+  margin-left: 2%;
+}
+.col-3:first-child {
+  margin-left: 0;
+}

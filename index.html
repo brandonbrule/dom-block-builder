@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Scss Visualizing Equal Spaced Mixin</title>
+
+  <meta name="robots" content="noindex">
+
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+
+<pre>
+// -- Paste Code Examples Below to See Calculation Required for Equally Spaced Columns -- //
+
+</pre>
+<hr>
+
+<button class="clearall" onclick="clearEverything()">Clear All</button>
+<div id="display"></div>
+<hr>
+<h2>Equation</h2>
+<pre>
+
+Number of Columns - First Column = Remaining Number of Columns
+
+Remaining Number of Columns * Margin Spacing = Total Margin Spacing
+
+Container Width - Total Margin Spacing = Remaining Width
+
+Remaining Width / Total Number of Columns = Each Column Width
+
+===========================================================================================
+
+( $container_width - ( $margin_spacing * ( $number_of_columns - 1 ) ) ) / $number_of_columns
+
+===========================================================================================
+</pre>
+<hr>
+<pre>
+
+// Code Examples
+
+// JS Functional Parameters
+// showEqualColSteps(number_of_columns, spacing, container_width, measurement);
+
+// Percentages
+
+showEqualColSteps('2', '5%', '100%', '%');
+
+showEqualColSteps('3', '2%', '100%', '%');
+
+// PX
+
+showEqualColSteps('2', '100px', '800px', 'px');
+
+showEqualColSteps('4', '10px', '800px', 'px');
+
+</pre>
+<hr>
+<div id="equationresult"></div>
+
+<hr>
+
+<h2>The Sass Mixin</h2>
+<pre>
+
+@mixin equalSpaced( $number_of_columns, $margin_spacing , $container_width  ){
+
+  width: ( $container_width - ( $margin_spacing  * ($number_of_columns - 1) ) ) / $number_of_columns;
+
+  // Add Margin Left to Every Column
+  margin-left: $margin_spacing ;
+
+  // Remove Spacing from First Child
+  &:first-child{
+    margin-left: 0;
+  }
+
+}
+
+// Useage
+
+.col-2{
+  @include equalSpaced(2, 10%, 100%);
+}
+
+</pre>
+<hr>
+<h2><a target="_blank" href="http://codepen.io/mad-d/pen/rkbsC">Layout Formula Codepen without Sass</a></h2>
+
+
+  <script src='http://brandonbrule.github.io/itsa/js/itsa.js'></script>
+
+  <script src="js/index.js"></script>
+
+</body>
+
+</html>

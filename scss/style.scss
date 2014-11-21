@@ -1,0 +1,72 @@
+// -- Clearfix -- //
+// @extend .clearfix
+.clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+// -- Equal Spaced Columns -- //
+// Number of Columns - First Column
+// Remaining Number of Columns * Margin Spacing
+// Container Width - Total Margin Spacing
+// Remaining Width / Total Number of Columns
+
+@mixin equalSpaced( $number_of_columns, $margin_spacing , $container_width  ){
+  
+  width: ( $container_width - ( $margin_spacing  * ( $number_of_columns - 1 ) ) ) / $number_of_columns;
+  
+  // Add Margin Left to Every Column
+  margin-left: $margin_spacing ;
+  
+  // Remove Spacing from First Child
+  &:first-child{
+    margin-left: 0;
+  }
+  
+}
+
+
+
+
+
+.container{
+  max-width: 800px;
+  background-color: #abc;
+  margin: 5% auto;
+}
+
+.clearall{
+  position: fixed;
+  top: 10px;
+  padding: 5px;
+  right: 10px;
+  z-index: 100;
+}
+
+.col-container{
+  @extend .clearfix;
+}
+
+// Col 2 Usage
+.col-2{
+  background: #333;
+  min-height: 100px;
+  float: left;
+  // equalSpaced( $num_of_cols, $spacing, $width  )
+  @include equalSpaced(2, 5%, 100%);
+}
+
+
+// Col 2 Usage
+.col-3{
+  background: #333;
+  min-height: 100px;
+  float: left;
+  // equalSpaced( $num_of_cols, $spacing, $width  )
+  @include equalSpaced(3, 2%, 100%);
+}
+
