@@ -1,3 +1,10 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 // -- Clearfix -- //
 // @extend .clearfix
 .clearfix {
@@ -8,6 +15,10 @@
   }
 }
 
+body{
+  margin: 0;
+  font-size: 1em;
+}
 
 // -- Equal Spaced Columns -- //
 // Number of Columns - First Column
@@ -15,58 +26,79 @@
 // Container Width - Total Margin Spacing
 // Remaining Width / Total Number of Columns
 
-@mixin equalSpaced( $number_of_columns, $margin_spacing , $container_width  ){
+// -- Equal Spaced Columns -- //
+// Number of Columns - First Column
+// Remaining Number of Columns * Margin Spacing
+// Container Width - Total Margin Spacing
+// Remaining Width / Total Number of Columns
+
+@mixin equalSpaced( $num_of_cols, $spacing, $container_width  ){
   
-  width: ( $container_width - ( $margin_spacing  * ( $number_of_columns - 1 ) ) ) / $number_of_columns;
-  
-  // Add Margin Left to Every Column
-  margin-left: $margin_spacing ;
+  width: ( $container_width - ( $spacing * ($num_of_cols - 1) ) ) / $num_of_cols;
+  margin-left: $spacing;
+  margin-top: $spacing;
+  float: left;
   
   // Remove Spacing from First Child
   &:first-child{
     margin-left: 0;
   }
   
+  
+  // Remove margin-left of the first element in each row.
+  &:nth-child( #{$num_of_cols}n + 1){
+    margin-left: 0;
+  }
+  
+  // Top Row Remove Margin Top from First Row of Columns
+  @for $i from 1 through $num_of_cols {
+      &:nth-child(#{$i}) {
+          margin-top: 0;
+      }
+  }
+
+  
 }
 
 
-
-
-
-.container{
-  max-width: 800px;
-  background-color: #abc;
-  margin: 5% auto;
-}
-
-.clearall{
+header{
+  padding: 1.5rem;
+  opacity: 0;
   position: fixed;
-  top: 10px;
-  padding: 5px;
-  right: 10px;
-  z-index: 100;
+  z-index: 1;
+  background: #fff;
+  top: 0;
+  right: 0;
+  transition:all 0.3s ease;
+  box-shadow: 3px 1px 10px -1px #666;
+
+  &:hover{
+    opacity: 1;
+  }
+}
+
+
+
+.build-steps{
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none;
+  @extend .clearfix;
+  li{
+    float: right; 
+    margin-left: 1em;
+  }
 }
 
 .col-container{
   @extend .clearfix;
+  margin: 0 auto;
 }
 
-// Col 2 Usage
-.col-2{
-  background: #333;
-  min-height: 100px;
-  float: left;
-  // equalSpaced( $num_of_cols, $spacing, $width  )
-  @include equalSpaced(2, 5%, 100%);
-}
 
 
 // Col 2 Usage
-.col-3{
-  background: #333;
-  min-height: 100px;
-  float: left;
-  // equalSpaced( $num_of_cols, $spacing, $width  )
-  @include equalSpaced(3, 2%, 100%);
+.controls{
+  input{ display: block; margin: 0; }
+  label{ display: block; }
 }
-

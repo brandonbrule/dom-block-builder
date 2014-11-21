@@ -1,41 +1,46 @@
-.clearfix:after, .col-container:after {
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+.clearfix:after, .build-steps:after, .col-container:after {
   content: "";
   display: table;
-  clear: both;
-}
+  clear: both; }
 
-.container {
-  max-width: 800px;
-  background-color: #abc;
-  margin: 5% auto;
-}
+body {
+  margin: 0;
+  font-size: 1em; }
 
-.clearall {
+header {
+  padding: 1.5rem;
+  opacity: 0;
   position: fixed;
-  top: 10px;
-  padding: 5px;
-  right: 10px;
-  z-index: 100;
-}
+  z-index: 1;
+  background: #fff;
+  top: 0;
+  right: 0;
+  transition: all 0.3s ease;
+  box-shadow: 3px 1px 10px -1px #666; }
+  header:hover {
+    opacity: 1; }
 
-.col-2 {
-  background: #333;
-  min-height: 100px;
-  float: left;
-  width: 47.5%;
-  margin-left: 5%;
-}
-.col-2:first-child {
-  margin-left: 0;
-}
+.build-steps {
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none; }
+  .build-steps li {
+    float: right;
+    margin-left: 1em; }
 
-.col-3 {
-  background: #333;
-  min-height: 100px;
-  float: left;
-  width: 32%;
-  margin-left: 2%;
-}
-.col-3:first-child {
-  margin-left: 0;
-}
+.col-container {
+  margin: 0 auto; }
+
+.controls input {
+  display: block;
+  margin: 0; }
+.controls label {
+  display: block; }
+
+/*# sourceMappingURL=style.css.map */

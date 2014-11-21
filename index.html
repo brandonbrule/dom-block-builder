@@ -10,90 +10,65 @@
   <meta name="robots" content="noindex">
 
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 </head>
 
 <body>
 
-<pre>
-// -- Paste Code Examples Below to See Calculation Required for Equally Spaced Columns -- //
 
-</pre>
-<hr>
+<header>
 
-<button class="clearall" onclick="clearEverything()">Clear All</button>
+
+  
+
+
+  <div class="controls col-container">
+
+    <div class="col-4">
+      <label>Width</label>
+      <input id="container-width" type="range" min="5" max="100" step="5" value="80">
+    </div>
+
+
+    <div class="col-4">
+      <label>Height</label>
+      <input id="block-height" type="range" min="5" max="250" step="5" value="150">
+    </div>
+
+    <div class="col-4">
+      <label>Number of Rows</label>
+      <input id="number_of_rows" type="range" min="1" max="10" value="4">
+    </div>
+
+    <div class="col-4">
+      <label>Space In Between</label>
+      <input id="margin-width" type="range" min="1" max="10" value="2">
+    </div>
+
+  </div>
+
+  <ul class="build-steps">
+    <li>
+      <button class="clearall" onclick="submitBlockDetails()">Build</button>
+    </li>
+    <li>
+      <button class="removelast" onclick="removeLast()">Remove Last</button>
+    </li>
+  </ul>
+</header>
+
+<div id="preview-display"></div>
+
+
 <div id="display"></div>
-<hr>
-<h2>Equation</h2>
-<pre>
 
-Number of Columns - First Column = Remaining Number of Columns
-
-Remaining Number of Columns * Margin Spacing = Total Margin Spacing
-
-Container Width - Total Margin Spacing = Remaining Width
-
-Remaining Width / Total Number of Columns = Each Column Width
-
-===========================================================================================
-
-( $container_width - ( $margin_spacing * ( $number_of_columns - 1 ) ) ) / $number_of_columns
-
-===========================================================================================
-</pre>
-<hr>
-<pre>
-
-// Code Examples
-
-// JS Functional Parameters
-// showEqualColSteps(number_of_columns, spacing, container_width, measurement);
-
-// Percentages
-
-showEqualColSteps('2', '5%', '100%', '%');
-
-showEqualColSteps('3', '2%', '100%', '%');
-
-// PX
-
-showEqualColSteps('2', '100px', '800px', 'px');
-
-showEqualColSteps('4', '10px', '800px', 'px');
-
-</pre>
-<hr>
 <div id="equationresult"></div>
 
-<hr>
+<textarea id="mysteps"></textarea>
 
-<h2>The Sass Mixin</h2>
 <pre>
-
-@mixin equalSpaced( $number_of_columns, $margin_spacing , $container_width  ){
-
-  width: ( $container_width - ( $margin_spacing  * ($number_of_columns - 1) ) ) / $number_of_columns;
-
-  // Add Margin Left to Every Column
-  margin-left: $margin_spacing ;
-
-  // Remove Spacing from First Child
-  &:first-child{
-    margin-left: 0;
-  }
-
-}
-
-// Useage
-
-.col-2{
-  @include equalSpaced(2, 10%, 100%);
-}
-
 </pre>
-<hr>
-<h2><a target="_blank" href="http://codepen.io/mad-d/pen/rkbsC">Layout Formula Codepen without Sass</a></h2>
-
 
   <script src='http://brandonbrule.github.io/itsa/js/itsa.js'></script>
 
