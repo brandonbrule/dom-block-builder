@@ -61,13 +61,33 @@ function rgbtohex(color){
 
 
 
+function scanAllAndSetCastleHistory(){
+  var rows = display.getElementsByTagName('article');
+  var temparr=[];
 
+  for ( var i = 0, len = rows.length; i < len; i++ ){
+    var container_width = parseInt(rows[i].style.width);
+    var block_height = parseInt(rows[i].lastChild.style.height);
+    var number_of_columns = parseInt(rows[i].children.length);
+    var spacing = parseInt(rows[i].lastChild.style.marginLeft);
+    var block_colour = rgbtohex( rows[i].lastChild.style.background );
+    var background_colour = rgbtohex( rows[i].style.background );
+
+    temparr.unshift([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
+  }
+
+  // Local Storage Build History
+  castle_history = temparr;
+
+  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
+  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+}
 
 
 
 // LOAD FROM LOCAL STORAGE
 function createCastleFromString(string){
-  
+
   var CastleHistory = JSON.parse(string);
 
   for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
@@ -164,9 +184,8 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
 
 
     closeButton.onclick = function () {
-      its.a(whole_container);
       col_container_wrapper.parentNode.removeChild(col_container_wrapper);
-
+      scanAllAndSetCastleHistory();
     };
   
 
