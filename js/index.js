@@ -93,6 +93,7 @@ createCastleFromString(localStorage.getItem('CastleHistory'));
 function clearAll(){
   display.innerHTML = '';
   preview_display.innerHTML = '';
+  castle_history_url_string_container.innerHTML = '';
   localStorage.removeItem('CastleHistory');
   castle_history = [];
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
