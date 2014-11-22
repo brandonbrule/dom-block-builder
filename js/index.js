@@ -46,6 +46,8 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   col_container.style.width = container_width + '%';
   col_container.style.position = 'relative';
 
+  col_container.addEventListener('click', copyCols);
+
 
 
   // Create Close Button Element
@@ -89,7 +91,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   whole_container.insertBefore(col_container, whole_container.firstChild);
 
 
-  col_container.addEventListener('click', copyCols);
+  
 
   // Run Correct First Margin 
   var cols = col_container.getElementsByTagName('span');
@@ -103,16 +105,10 @@ function copyCols(event){
   var container_width = parseInt(this.style.width);
   var block_height = parseInt(this.scrollHeight);
   var cols = col_container.children;
-  var number_of_columns = cols.length;
+  var number_of_columns = cols.length - 1;
   var spacing = this.lastChild.style.marginLeft;
 
   calculate_widths(container_width, block_height, number_of_columns, spacing, display);
-}
-
-function removeColsButton(parentContainer){
-
-  
-  
 }
 
 

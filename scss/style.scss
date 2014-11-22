@@ -75,9 +75,8 @@ header{
   box-shadow: 3px 1px 10px -1px #666;
   background: #fff;
   position: absolute;
-  width: 200px;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
   opacity: 0;
   z-index: 1;
   transition:all 0.3s ease;
@@ -90,7 +89,8 @@ header{
 
   label{ display: block; }
   input{ 
-    display: block; 
+    display: block;
+    width: 100%;
     transition:all 0.3s ease;
     &:hover{
      transform: scale(1.1);
@@ -100,9 +100,11 @@ header{
   ul{
     list-style: none;
     padding: 0;
+    @extend .clearfix;
 
     li{
       margin-top: 10px;
+      @include equalSpaced(3, 5%, 100%);
     }
     button{
       width: 100%;
@@ -111,6 +113,10 @@ header{
     }
   }
   
+}
+
+.control-group{
+  @include equalSpaced(4, 5%, 100%);
 }
 
 
@@ -131,19 +137,13 @@ header{
 }
 
 
-
 #preview-display{
   background: #ececec;
 }
 
-.preview-display-small-container{
-  overflow:hidden;
-  height: 50px;
-}
 
 
-
-#display .col-container{
+#display .col-container, #preview-display .col-container{
   transition:all 0.3s ease;
   &:hover{
     box-shadow: inset 0 0 0 25px #53a7ea;
