@@ -38,14 +38,7 @@ var castle_history_url_string = document.URL + '#' + encodeURIComponent(localSto
 castle_history_url_string_container.innerHTML = castle_history_url_string;
 
 
-// If someone sends you a link of a castle.
-if(window.location.hash) {
- var hash_value = window.location.hash.replace('#', '');
- var hash_to_array = decodeURIComponent(hash_value);
- display.innerHTML = '';
- createCastleFromString(hash_to_array);
- updateStats();
-}
+
 
 
 
@@ -357,5 +350,16 @@ magnification_el.addEventListener('input', function(){
 
 
 
+
+
+
+// If someone sends you a link of a castle.
+if(window.location.hash) {
+ var hash_value = window.location.hash.replace('#', '');
+ var hash_to_array = decodeURIComponent(hash_value);
+ display.innerHTML = '';
+ createCastleFromString(hash_to_array);
+ updateStats();
+}
 
 
