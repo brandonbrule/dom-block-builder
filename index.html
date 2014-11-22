@@ -9,6 +9,7 @@
 
   <meta name="robots" content="noindex">
 
+  <link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
@@ -18,18 +19,15 @@
 
 
 
-  
-
-
+<div class="zoom-container">
+  <label class="fa fa-search"></label>
+  <input id="magnification" type="range" min="1" max="10" step="1" value="10">
+</div>
 
 <div id="controls" class="controls">
   
-  <div class="col-container">
 
-    <div class="control-group">
-      <label>Width</label>
-      <input id="container-width" type="range" min="1" max="100" step="1" value="80">
-    </div>
+  <div class="col-container">
 
     <div class="control-group">
       <label>Columns</label>
@@ -37,32 +35,61 @@
     </div>
 
     <div class="control-group">
+      <label>Width</label>
+      <input id="container-width" type="range" min="1" max="100" step="1" value="50">
+    </div>
+
+  </div>
+
+
+  <div class="col-container">
+
+    <div class="control-group">
       <label>Spacing</label>
-      <input id="margin-width" type="range" min="1" max="10" value="2">
+      <input id="margin-width" type="range" min="1" max="10" value="1">
     </div>
 
 
     <div class="control-group">
       <label>Height</label>
-      <input id="block-height" type="range" min="5" max="250" step="1" value="150">
+      <input id="block-height" type="range" min="5" max="250" step="1" value="50">
+    </div>
+
+  </div>
+
+
+  <div class="col-container">
+
+    <div class="control-group-3">
+      <label>Colour 1</label>
+      <input id="block-colour" type="text" value="#111111">
     </div>
 
 
-
-    <div class="control-group">
-        <label>Zoom</label>
-        <input id="magnification" type="range" min="1" max="10" step="1" value="10">
+    <div class="control-group-3">
+      <label>Colour 2</label>
+      <input id="background-colour" type="text" value="#ffffff">
     </div>
 
-    <div class="control-group">
-      <input type="button" class="clearall" onclick="placeBlock()" value="Set Blocks">
+    <div class="control-group-3">
+      <label>Invert</label>
+      <input id="invert-colours" type="checkbox">
     </div>
+
+  </div>
+
+
+  <div class="col-container">
 
     <div class="control-group">
       <ul id="stats-container">
         <li id="stat-blocks-placed">Blocks:</li>
         <li id="stat-castle-height">Height:</li>
       </ul>
+    </div>
+
+    <div class="control-group">
+      <input type="button" class="clearall" onclick="placeBlock()" value="Place Blocks">
     </div>
 
   </div>

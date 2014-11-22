@@ -61,18 +61,39 @@ body{
   font-size: 1em;
   background: #fff;
   font-family: Optima,Segoe,"Segoe UI",Candara,Calibri,Arial,sans-serif;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
+
+label:before{ border: 1px solid #cecece; color: #cecece; padding: 0.25rem }
+input{  }
+
+
+.zoom-container{
+  position:fixed;
+  z-index:10;
+  top:10px;
+  left:10px;
+  input{
+    position: relative;
+    top:5px;
+  }
+}
+
+
 
 
 
 .controls{
   list-style: none;
-  padding: 0.5rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   box-shadow: -1px 1px 4px 0px #666;
   background: #fff;
   position: fixed;
   right: 40px;
-  top: 10px;
+  top: 0;
   opacity: 0;
   z-index: 1;
   transition:all 0.3s ease;
@@ -82,12 +103,20 @@ body{
     header{border:1px solid red;}
   }
 
+  .col-container{
+    margin-top: 1em;
+    &:first-child{
+      margin-top: 0;
+    }
+  }
+
 
   label{ display: block; }
   input{ 
     display: block;
     width: 100%;
   }
+
 
   ul{
     list-style: none;
@@ -108,11 +137,22 @@ body{
     }
   }
   
+
 }
 
+
 .control-group{
-  @include equalSpaced(7, 2%, 100%);
+  @include equalSpaced(2, 10%, 100%);
 }
+
+.control-group-3{
+  @include equalSpaced(3, 10%, 100%);
+}
+
+
+
+
+
 
 
 

@@ -13,16 +13,34 @@ body {
   margin: 0;
   font-size: 1em;
   background: #fff;
-  font-family: Optima,Segoe,"Segoe UI",Candara,Calibri,Arial,sans-serif; }
+  font-family: Optima,Segoe,"Segoe UI",Candara,Calibri,Arial,sans-serif;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+label:before {
+  border: 1px solid #cecece;
+  color: #cecece;
+  padding: 0.25rem; }
+
+.zoom-container {
+  position: fixed;
+  z-index: 10;
+  top: 10px;
+  left: 10px; }
+  .zoom-container input {
+    position: relative;
+    top: 5px; }
 
 .controls {
   list-style: none;
-  padding: 0.5rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   box-shadow: -1px 1px 4px 0px #666;
   background: #fff;
   position: fixed;
   right: 40px;
-  top: 10px;
+  top: 0;
   opacity: 0;
   z-index: 1;
   transition: all 0.3s ease; }
@@ -30,6 +48,10 @@ body {
     opacity: 1; }
     .controls:hover header {
       border: 1px solid red; }
+  .controls .col-container {
+    margin-top: 1em; }
+    .controls .col-container:first-child {
+      margin-top: 0; }
   .controls label {
     display: block; }
   .controls input {
@@ -49,27 +71,33 @@ body {
       text-align: center; }
 
 .control-group {
-  width: 12.57143%;
-  margin-left: 2%;
-  margin-top: 2%;
+  width: 45%;
+  margin-left: 10%;
+  margin-top: 10%;
   float: left; }
   .control-group:first-child {
     margin-left: 0; }
-  .control-group:nth-child(7n + 1) {
+  .control-group:nth-child(2n + 1) {
     margin-left: 0; }
   .control-group:nth-child(1) {
     margin-top: 0; }
   .control-group:nth-child(2) {
     margin-top: 0; }
-  .control-group:nth-child(3) {
+
+.control-group-3 {
+  width: 26.66667%;
+  margin-left: 10%;
+  margin-top: 10%;
+  float: left; }
+  .control-group-3:first-child {
+    margin-left: 0; }
+  .control-group-3:nth-child(3n + 1) {
+    margin-left: 0; }
+  .control-group-3:nth-child(1) {
     margin-top: 0; }
-  .control-group:nth-child(4) {
+  .control-group-3:nth-child(2) {
     margin-top: 0; }
-  .control-group:nth-child(5) {
-    margin-top: 0; }
-  .control-group:nth-child(6) {
-    margin-top: 0; }
-  .control-group:nth-child(7) {
+  .control-group-3:nth-child(3) {
     margin-top: 0; }
 
 .col-container {
