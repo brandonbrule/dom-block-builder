@@ -84,7 +84,9 @@ function createCastleFromString(string){
 
 }
 
+if (localStorage.getItem("CastleHistory") === null) {
 createCastleFromString(localStorage.getItem('CastleHistory'));
+}
 
 
 
