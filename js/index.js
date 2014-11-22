@@ -26,7 +26,61 @@ var invert_colours_el = document.getElementById('invert-colours');
 
 
 
+var castle_history = [];
 
+
+
+
+
+function rgbtohex(color){
+  if (color.substr(0, 1) === '#') {
+        return color;
+    }
+    var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
+
+    var red = parseInt(digits[2]);
+    var green = parseInt(digits[3]);
+    var blue = parseInt(digits[4]);
+
+    var rgb = blue | (green << 8) | (red << 16);
+    return digits[1] + '#' + rgb.toString(16);
+}
+
+
+
+
+
+
+
+
+
+// LOAD FROM LOCAL STORAGE
+
+function createCastleFromString(string){
+
+  var CastleHistory = JSON.parse(string);
+
+  for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
+    castle_history.push(CastleHistory[i]);
+    calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
+  }
+
+}
+
+
+createCastleFromString(localStorage.getItem('CastleHistory'));
+
+
+
+
+
+function clearAll(){
+  display.innerHTML = '';
+  preview_display.innerHTML = '';
+  localStorage.removeItem('CastleHistory');
+  castle_history = [];
+  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
+}
 
 
 
@@ -36,7 +90,7 @@ var invert_colours_el = document.getElementById('invert-colours');
 // Equal Spaced Equation
 // Parse All Inputs as Numbers
 // Calculate Size and Margin and Send those values off to create the columns.
-function calculate_widths(container_width, block_height, number_of_columns, spacing, whole_container, block_colour, background_colour){
+function calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container){
   var int_number_of_columns = parseInt(number_of_columns);
   var int_spacing = parseInt(spacing);
   var int_container_width = parseInt(container_width);
@@ -60,8 +114,10 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   var col_style_width;
   var col_style_margin;
   var whole_container = whole_container;
-
   var col_container_wrapper = document.createElement('section');
+
+
+  // Col Wrapper
   col_container_wrapper.style.position = 'relative';
   col_container_wrapper.style.width = '100%';
   
@@ -129,7 +185,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
 
 
 
-//-------------- Display Columns --------------//
+//-------------- Build Controls --------------//
 //---------------------------------------------//
 
 // Preview Changes
@@ -145,9 +201,7 @@ block_colour_el.addEventListener('input', previewBuild);
 background_colour_el.addEventListener('input', previewBuild);
 
 
-// Magnification
-
-
+// Invert Colours
 invert_colours_el.addEventListener('click', function(){
   var block_colour = document.getElementById('block-colour').value;
   var background_colour = document.getElementById('background-colour').value;
@@ -157,21 +211,6 @@ invert_colours_el.addEventListener('click', function(){
 
   previewBuild()
 });
-
-
-function rgbtohex(color){
-  if (color.substr(0, 1) === '#') {
-        return color;
-    }
-    var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
-
-    var red = parseInt(digits[2]);
-    var green = parseInt(digits[3]);
-    var blue = parseInt(digits[4]);
-
-    var rgb = blue | (green << 8) | (red << 16);
-    return digits[1] + '#' + rgb.toString(16);
-}
 
 
 
@@ -188,7 +227,7 @@ function previewBuild(){
 
   preview_display.innerHTML = '';
 
-  calculate_widths(container_width, block_height, number_of_columns, spacing, preview_display, block_colour, background_colour);
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
   
 };
 
@@ -204,10 +243,21 @@ function placeBlock(){
 
   var block_colour = document.getElementById('block-colour').value;
   var background_colour = document.getElementById('background-colour').value;
-  
-  calculate_widths(container_width, block_height, number_of_columns, spacing, display, block_colour, background_colour);
 
+
+  // Remove Preview Display
   preview_display.innerHTML = '';
+
+
+  // Local Storage Build History
+  castle_history.push([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
+  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
+  
+
+  // Place Objects
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
+
+  
 
   // Update Stats
   updateStats();
@@ -261,6 +311,8 @@ function updateStats(){
 
 
 
+
+
 // Toggle Buildemode
 toggle_buildmode.addEventListener('click', function(){
 
@@ -283,4 +335,4 @@ magnification_el.addEventListener('input', function(){
 
 
 
-placeBlock();
+
