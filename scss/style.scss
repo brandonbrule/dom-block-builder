@@ -71,12 +71,16 @@ label:before{ border: 1px solid #cecece; color: #cecece; padding: 0.25rem }
 input{  }
 
 
+.buildmode, .left-controls, .controls{
+  background :rgba(255,255,255,0.9);
+}
+
+
 .buildmode{
   position:fixed;
   z-index:10;
   top:0px;
   left:10px;
-  background:#fff;
   padding:0.5rem 1rem;
 }
 
@@ -86,7 +90,6 @@ input{  }
   z-index:10;
   top:40px;
   left:10px;
-  background:#fff;
   padding:1rem;
 }
 
@@ -112,16 +115,10 @@ input{  }
   list-style: none;
   padding: 2.5rem 1.5rem;
   box-shadow: -1px 1px 4px 0px #666;
-  background: #fff;
   position: fixed;
   right: 40px;
   top: 0;
   z-index: 1;
-
-  &:hover{
-    opacity: 1;
-    header{border:1px solid red;}
-  }
 
   .col-container{
     margin-top: 1em;
