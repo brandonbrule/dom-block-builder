@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8">
 
-  <title>Scss Visualizing Equal Spaced Mixin</title>
+  <title>Layout Castle Builder</title>
 
   <meta name="robots" content="noindex">
 
@@ -18,54 +18,59 @@
 
 
 <header>
-
-
-  
-
-
-  <div class="controls col-container">
-
-    <div class="col-4">
-      <label>Width</label>
-      <input id="container-width" type="range" min="5" max="100" step="5" value="80">
-    </div>
-
-
-    <div class="col-4">
-      <label>Height</label>
-      <input id="block-height" type="range" min="5" max="250" step="5" value="150">
-    </div>
-
-    <div class="col-4">
-      <label>Number of Rows</label>
-      <input id="number_of_rows" type="range" min="1" max="10" value="4">
-    </div>
-
-    <div class="col-4">
-      <label>Space In Between</label>
-      <input id="margin-width" type="range" min="1" max="10" value="2">
-    </div>
-
-  </div>
-
-  <ul class="build-steps">
-    <li>
-      <button class="clearall" onclick="submitBlockDetails()">Build</button>
-    </li>
-    <li>
-      <button class="removelast" onclick="removeLast()">Remove Last</button>
-    </li>
-  </ul>
+  <div id="preview-display"></div>
 </header>
 
-<div id="preview-display"></div>
+
+<div id="controls" class="controls">
+
+  <div class="control-group">
+    <label>Width</label>
+    <input id="container-width" type="range" min="1" max="100" step="1" value="80">
+  </div>
+
+  <div class="control-group">
+    <label>Number of Columns</label>
+    <input id="number-of-columns" type="range" min="1" max="10" step="1" value="1">
+  </div>
+
+  <div class="control-group">
+    <label>Space In Between</label>
+    <input id="margin-width" type="range" min="1" max="10" value="2">
+  </div>
+
+
+  <div class="control-group">
+    <label>Height</label>
+    <input id="block-height" type="range" min="5" max="250" step="1" value="150">
+  </div>
+
+  <ul id="stats-container">
+    <li id="stat-blocks-placed"></li>
+    <li id="stat-castle-height"></li>
+  </ul>
+
+
+  <ul class="build-controls">
+    <li>
+      <button class="clearall" onclick="placeBlock()">Place Blocks</button>
+    </li>
+    <li>
+      <button class="removelast" onclick="removeLastPlacedColumn()">Remove Top Blocks</button>
+    </li>
+  </ul>
+
+</div>
+
+
+
 
 
 <div id="display"></div>
 
 <div id="equationresult"></div>
 
-<textarea id="mysteps"></textarea>
+<textarea id="build-steps"></textarea>
 
 <pre>
 </pre>

@@ -15,12 +15,6 @@ html {
   }
 }
 
-body{
-  margin: 0;
-  font-size: 1em;
-  background: #fff;
-}
-
 // -- Equal Spaced Columns -- //
 // Number of Columns - First Column
 // Remaining Number of Columns * Margin Spacing
@@ -62,44 +56,99 @@ body{
 }
 
 
-header{
-  padding: 1.5rem;
-  opacity: 0;
-  position: fixed;
-  z-index: 1;
+body{
+  margin: 0;
+  font-size: 1em;
   background: #fff;
-  top: 0;
-  right: 0;
-  transition:all 0.3s ease;
+}
+
+
+
+header{
+
+}
+
+
+.controls{
+  list-style: none;
+  padding: 1.5rem;
   box-shadow: 3px 1px 10px -1px #666;
+  background: #fff;
+  position: absolute;
+  width: 200px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  transition:all 0.3s ease;
 
   &:hover{
     opacity: 1;
+    header{border:1px solid red;}
   }
+
+
+  label{ display: block; }
+  input{ 
+    display: block; 
+    transition:all 0.3s ease;
+    &:hover{
+     transform: scale(1.1);
+    }
+  }
+
+  ul{
+    list-style: none;
+    padding: 0;
+
+    li{
+      margin-top: 10px;
+    }
+    button{
+      width: 100%;
+      display:block;
+      text-align:center;
+    }
+  }
+  
 }
 
 
 
-.build-steps{
-  padding: 0;
-  margin-bottom: 0;
-  list-style: none;
-  @extend .clearfix;
-  li{
-    float: right; 
-    margin-left: 1em;
-  }
-}
+
+
+
 
 .col-container{
   @extend .clearfix;
   margin: 0 auto;
+  &:hover button{
+    opacity: 1;
+  }
+  button{
+    opacity: 0;
+  }
 }
 
 
 
-// Col 2 Usage
-.controls{
-  input{ display: block; margin: 0; }
-  label{ display: block; }
+#preview-display{
+  background: #ececec;
 }
+
+.preview-display-small-container{
+  overflow:hidden;
+  height: 50px;
+}
+
+
+
+#display .col-container{
+  transition:all 0.3s ease;
+  &:hover{
+    box-shadow: inset 0 0 0 25px #53a7ea;
+  }
+}
+
+
+

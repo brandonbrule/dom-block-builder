@@ -4,7 +4,7 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
-.clearfix:after, .build-steps:after, .col-container:after {
+.clearfix:after, .col-container:after {
   content: "";
   display: table;
   clear: both; }
@@ -14,34 +14,56 @@ body {
   font-size: 1em;
   background: #fff; }
 
-header {
+.controls {
+  list-style: none;
   padding: 1.5rem;
-  opacity: 0;
-  position: fixed;
-  z-index: 1;
+  box-shadow: 3px 1px 10px -1px #666;
   background: #fff;
-  top: 0;
+  position: absolute;
+  width: 200px;
   right: 0;
-  transition: all 0.3s ease;
-  box-shadow: 3px 1px 10px -1px #666; }
-  header:hover {
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.3s ease; }
+  .controls:hover {
     opacity: 1; }
-
-.build-steps {
-  padding: 0;
-  margin-bottom: 0;
-  list-style: none; }
-  .build-steps li {
-    float: right;
-    margin-left: 1em; }
+    .controls:hover header {
+      border: 1px solid red; }
+  .controls label {
+    display: block; }
+  .controls input {
+    display: block;
+    transition: all 0.3s ease; }
+    .controls input:hover {
+      transform: scale(1.1); }
+  .controls ul {
+    list-style: none;
+    padding: 0; }
+    .controls ul li {
+      margin-top: 10px; }
+    .controls ul button {
+      width: 100%;
+      display: block;
+      text-align: center; }
 
 .col-container {
   margin: 0 auto; }
+  .col-container:hover button {
+    opacity: 1; }
+  .col-container button {
+    opacity: 0; }
 
-.controls input {
-  display: block;
-  margin: 0; }
-.controls label {
-  display: block; }
+#preview-display {
+  background: #ececec; }
+
+.preview-display-small-container {
+  overflow: hidden;
+  height: 50px; }
+
+#display .col-container {
+  transition: all 0.3s ease; }
+  #display .col-container:hover {
+    box-shadow: inset 0 0 0 25px #53a7ea; }
 
 /*# sourceMappingURL=style.css.map */
