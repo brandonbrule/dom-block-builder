@@ -183,6 +183,10 @@ input{  }
   &:hover button{
     opacity: 1;
   }
+
+  span{
+    float: left;
+  }
   button{
     opacity: 0;
   }

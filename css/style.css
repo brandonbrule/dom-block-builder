@@ -116,6 +116,8 @@ label:before {
   margin: 0 auto; }
   .col-container:hover button {
     opacity: 1; }
+  .col-container span {
+    float: left; }
   .col-container button {
     opacity: 0; }
 
