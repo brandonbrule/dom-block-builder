@@ -43,6 +43,7 @@ if(window.location.hash) {
  var hash_value = window.location.hash.replace('#', '');
  var hash_to_array = decodeURIComponent(hash_value);
  createCastleFromString(hash_to_array);
+ updateStats();
 }
 
 
