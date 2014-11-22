@@ -1,4 +1,15 @@
 
+var toggle_buildmode = document.getElementById('toggle-buildmode');
+
+
+
+var left_container = document.getElementById('left-controls-container');
+var magnification_el = document.getElementById('magnification');
+
+
+
+var build_controls_container = document.getElementById('build-controls-container');
+
 var group_display = document.getElementById('group-display');
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
@@ -15,7 +26,7 @@ var invert_colours_el = document.getElementById('invert-colours');
 
 
 
-var magnification_el = document.getElementById('magnification');
+
 
 
 
@@ -236,7 +247,18 @@ function updateStats(){
 
 
 
+// Toggle Buildemode
+toggle_buildmode.addEventListener('click', function(){
 
+  if ( left_container.style.display === 'none' ){
+    left_container.style.display ='block';
+    build_controls_container.style.display = 'block';
+  } else { 
+    left_container.style.display ='none';
+    build_controls_container.style.display = 'none';
+  }
+  
+});
 
 // Magnification
 magnification_el.addEventListener('input', function(){

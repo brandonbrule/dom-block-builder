@@ -17,84 +17,68 @@
 
 <body>
 
-
-
-<div class="zoom-container">
-  <label class="fa fa-search"></label>
-  <input id="magnification" type="range" min="1" max="10" step="1" value="10">
+<div class="buildmode">
+  <label>Toggle Controls</label>
+  <input type="checkbox" id="toggle-buildmode" checked>
 </div>
 
-<div id="controls" class="controls">
-  
+<div id="left-controls-container" class="left-controls">
+  <div class="zoom-container">
+    <label class="fa fa-search"></label>
+    <input id="magnification" type="range" min="2.5" max="10" step="2.5" value="10">
+  </div>
+
+  <ul id="stats-container">
+    <li id="stat-blocks-placed">Blocks:</li>
+    <li id="stat-castle-height">Height:</li>
+  </ul>
+</div>
+
+
+<div id="build-controls-container" class="controls">
 
   <div class="col-container">
-
     <div class="control-group">
       <label>Columns</label>
       <input id="number-of-columns" type="range" min="1" max="10" step="1" value="1">
     </div>
-
     <div class="control-group">
       <label>Width</label>
       <input id="container-width" type="range" min="1" max="100" step="1" value="50">
     </div>
-
   </div>
 
 
   <div class="col-container">
-
     <div class="control-group">
       <label>Spacing</label>
       <input id="margin-width" type="range" min="1" max="10" value="1">
     </div>
-
-
     <div class="control-group">
       <label>Height</label>
-      <input id="block-height" type="range" min="5" max="250" step="1" value="50">
+      <input id="block-height" type="range" min="5" max="250" step="1" value="25">
     </div>
-
   </div>
 
 
   <div class="col-container">
-
     <div class="control-group-3">
       <label>Colour 1</label>
       <input id="block-colour" type="text" value="#111111">
     </div>
-
-
     <div class="control-group-3">
       <label>Colour 2</label>
       <input id="background-colour" type="text" value="#ffffff">
     </div>
-
     <div class="control-group-3">
       <label>Invert</label>
       <input id="invert-colours" type="checkbox">
     </div>
-
   </div>
-
 
   <div class="col-container">
-
-    <div class="control-group">
-      <ul id="stats-container">
-        <li id="stat-blocks-placed">Blocks:</li>
-        <li id="stat-castle-height">Height:</li>
-      </ul>
-    </div>
-
-    <div class="control-group">
-      <input type="button" class="clearall" onclick="placeBlock()" value="Place Blocks">
-    </div>
-
+    <input type="button" class="clearall" onclick="placeBlock()" value="Place Blocks">
   </div>
-
-
 
 </div>
 
