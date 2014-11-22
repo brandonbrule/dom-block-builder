@@ -1,4 +1,5 @@
 
+var group_display = document.getElementById('group-display');
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
 
@@ -6,6 +7,16 @@ var number_of_columns_el = document.getElementById('number-of-columns');
 var spacing_el = document.getElementById('margin-width');
 var block_height_el = document.getElementById('block-height');
 var container_width_el = document.getElementById('container-width');
+
+
+
+var magnification_el = document.getElementById('magnification');
+magnification_el.addEventListener('input', changeMagnification);
+
+function changeMagnification(){
+  group_display.style.transform = 'scale(' + magnification_el.value * 0.1 + ')';
+}
+
 
 
 
@@ -192,4 +203,4 @@ function updateStats(){
 
 };
 
-// its.snippet();
+placeBlock();

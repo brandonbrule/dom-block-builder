@@ -17,48 +17,67 @@
 <body>
 
 
-<header>
-  <div id="preview-display"></div>
-</header>
+
+  
+
 
 
 <div id="controls" class="controls">
+  
+  <div class="col-container">
 
-  <div class="control-group">
-    <label>Width</label>
-    <input id="container-width" type="range" min="1" max="100" step="1" value="80">
+    <div class="control-group">
+      <label>Width</label>
+      <input id="container-width" type="range" min="1" max="100" step="1" value="80">
+    </div>
+
+    <div class="control-group">
+      <label>Columns</label>
+      <input id="number-of-columns" type="range" min="1" max="10" step="1" value="1">
+    </div>
+
+    <div class="control-group">
+      <label>Spacing</label>
+      <input id="margin-width" type="range" min="1" max="10" value="2">
+    </div>
+
+
+    <div class="control-group">
+      <label>Height</label>
+      <input id="block-height" type="range" min="5" max="250" step="1" value="150">
+    </div>
+
+
+
+    <div class="control-group">
+        <label>Zoom</label>
+        <input id="magnification" type="range" min="1" max="10" step="1" value="10">
+    </div>
+
+    <div class="control-group">
+      <input type="button" class="clearall" onclick="placeBlock()" value="Set Blocks">
+    </div>
+
+    <div class="control-group">
+      <ul id="stats-container">
+        <li id="stat-blocks-placed">Blocks:</li>
+        <li id="stat-castle-height">Height:</li>
+      </ul>
+    </div>
+
   </div>
 
-  <div class="control-group">
-    <label>Columns</label>
-    <input id="number-of-columns" type="range" min="1" max="10" step="1" value="1">
-  </div>
 
-  <div class="control-group">
-    <label>Spacing</label>
-    <input id="margin-width" type="range" min="1" max="10" value="2">
-  </div>
-
-
-  <div class="control-group">
-    <label>Height</label>
-    <input id="block-height" type="range" min="5" max="250" step="1" value="150">
-  </div>
-
-  <div class="control-group">
-    <ul id="stats-container">
-      <li id="stat-blocks-placed">Blocks:</li>
-      <li id="stat-castle-height">Height:</li>
-    </ul>
-  </div>
-
-  <div class="control-group">
-    <button class="clearall" onclick="placeBlock()">Place</button>
-  </div>
 
 </div>
 
-<div id="display"></div>
+
+<div id="group-display">
+  <div id="preview-display"></div>
+  <div id="display"></div>
+</div>
+
+
 
 
 <!-- <textarea id="build-steps"></textarea> -->
