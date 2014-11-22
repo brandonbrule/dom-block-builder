@@ -30,12 +30,12 @@
   </div>
 
   <div class="control-group">
-    <label># of Columns</label>
+    <label>Columns</label>
     <input id="number-of-columns" type="range" min="1" max="10" step="1" value="1">
   </div>
 
   <div class="control-group">
-    <label>Space Between</label>
+    <label>Spacing</label>
     <input id="margin-width" type="range" min="1" max="10" value="2">
   </div>
 
@@ -45,35 +45,24 @@
     <input id="block-height" type="range" min="5" max="250" step="1" value="150">
   </div>
 
-  <ul id="stats-container">
-    <li id="stat-blocks-placed"></li>
-    <li id="stat-castle-height"></li>
-  </ul>
+  <div class="control-group">
+    <ul id="stats-container">
+      <li id="stat-blocks-placed">Blocks:</li>
+      <li id="stat-castle-height">Height:</li>
+    </ul>
+  </div>
 
-
-  <ul class="build-controls">
-    <li>
-      <button class="clearall" onclick="placeBlock()">Place Blocks</button>
-    </li>
-    <li>
-      <button class="removelast" onclick="removeLastPlacedColumn()">Remove Top Blocks</button>
-    </li>
-  </ul>
+  <div class="control-group">
+    <button class="clearall" onclick="placeBlock()">Place</button>
+  </div>
 
 </div>
 
-
-
-
-
 <div id="display"></div>
 
-<div id="equationresult"></div>
 
 <!-- <textarea id="build-steps"></textarea> -->
 
-<pre>
-</pre>
 
   <script src='http://brandonbrule.github.io/itsa/js/itsa.js'></script>
 

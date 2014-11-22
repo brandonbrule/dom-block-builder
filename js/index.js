@@ -1,5 +1,4 @@
 
-var its_container_wrapper = document.getElementById('equationresult');
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
 
@@ -34,17 +33,21 @@ function calculate_widths(container_width, block_height, number_of_columns, spac
 
 // Create and Style Columns and the Container
 function createCols(container_width, int_block_height, col_width, number_of_columns, spacing, whole_container){
-  var col_container = document.createElement('section');
+  var col_container = document.createElement('article');
   var col;
   var col_style_width;
   var col_style_margin;
   var whole_container = whole_container;
 
+  var col_container_wrapper = document.createElement('section');
+  col_container_wrapper.style.position = 'relative';
+  col_container_wrapper.style.width = '100%';
+  
+
   
   // col-container
   col_container.setAttribute('class', 'col-container');
   col_container.style.width = container_width + '%';
-  col_container.style.position = 'relative';
 
   col_container.addEventListener('click', copyCols);
 
@@ -54,22 +57,12 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
     var closeButton = document.createElement('button'),
         closeCtx = document.createTextNode('x');
 
-    // Close Button Styles
-    closeButton.style.position = 'absolute';
-    closeButton.style.top = '3px';
-    closeButton.style.right = '3px';
-    closeButton.style.zIndex = '10';
-    closeButton.style.color = 'white';
-    closeButton.style.padding = '2px 5px';
-    closeButton.style.border = '1px solid white';
-    closeButton.style.background = 'none';    
-
     closeButton.appendChild(closeCtx);
-    col_container.appendChild(closeButton);
+    col_container_wrapper.appendChild(closeButton);
 
 
     closeButton.onclick = function () { 
-      col_container.parentNode.removeChild(col_container);
+      col_container_wrapper.parentNode.removeChild(col_container_wrapper);
     };
   
 
@@ -88,7 +81,9 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   }
 
 
-  whole_container.insertBefore(col_container, whole_container.firstChild);
+  col_container_wrapper.appendChild(col_container);
+
+  whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
 
 
   
@@ -105,10 +100,16 @@ function copyCols(event){
   var container_width = parseInt(this.style.width);
   var block_height = parseInt(this.scrollHeight);
   var cols = col_container.children;
-  var number_of_columns = cols.length - 1;
-  var spacing = this.lastChild.style.marginLeft;
+  var number_of_columns = cols.length;
+  var spacing = parseInt(this.lastChild.style.marginLeft);
 
-  calculate_widths(container_width, block_height, number_of_columns, spacing, display);
+  number_of_columns_el.value = number_of_columns;
+  spacing_el.value = spacing;
+  block_height_el.value = block_height;
+  container_width_el.value = container_width;
+
+  placeBlock();
+
 }
 
 
@@ -139,8 +140,11 @@ function previewBuild(){
   var spacing = document.getElementById('margin-width').value;
   var block_height = document.getElementById('block-height').value;
   var container_width = document.getElementById('container-width').value;
+
   preview_display.innerHTML = '';
+
   calculate_widths(container_width, block_height, number_of_columns, spacing, preview_display);
+  
 };
 
 
@@ -155,6 +159,8 @@ function placeBlock(){
 
   // Update Stats
   updateStats();
+
+  preview_display.innerHTML = '';
 
 };
 
