@@ -67,7 +67,7 @@ function rgbtohex(color){
 
 // LOAD FROM LOCAL STORAGE
 function createCastleFromString(string){
-
+  
   var CastleHistory = JSON.parse(string);
 
   for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
@@ -78,7 +78,16 @@ function createCastleFromString(string){
 }
 
 
-createCastleFromString(localStorage.getItem('CastleHistory'));
+// If someone sends you a link of a castle.
+if(window.location.hash) {
+ var hash_value = window.location.hash.replace('#', '');
+ var hash_to_array = decodeURIComponent(hash_value);
+ display.innerHTML = '';
+ createCastleFromString(hash_to_array);
+ updateStats();
+} else {
+  createCastleFromString(localStorage.getItem('CastleHistory'));
+}
 
 
 
@@ -154,8 +163,10 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
     col_container_wrapper.appendChild(closeButton);
 
 
-    closeButton.onclick = function () { 
+    closeButton.onclick = function () {
+      its.a(whole_container);
       col_container_wrapper.parentNode.removeChild(col_container_wrapper);
+
     };
   
 
@@ -265,9 +276,9 @@ function placeBlock(){
 
   // Local Storage Build History
   castle_history.push([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
-  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
 
-  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
+  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
+  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
   
 
   // Place Objects
@@ -353,13 +364,5 @@ magnification_el.addEventListener('input', function(){
 
 
 
-// If someone sends you a link of a castle.
-if(window.location.hash) {
- var hash_value = window.location.hash.replace('#', '');
- var hash_to_array = decodeURIComponent(hash_value);
- display.innerHTML = '';
- createCastleFromString(hash_to_array);
- updateStats();
-}
 
 
