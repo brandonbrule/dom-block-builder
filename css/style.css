@@ -135,13 +135,15 @@ p {
   cursor: pointer;
   top: 3px;
   z-index: 5;
-  color: #aa0000;
   background: #fff;
-  opacity: 0;
-  border: 3px solid #aa0000; }
+  opacity: 0; }
   #display button:first-child, #preview-display button:first-child {
-    right: 50px; }
+    right: 50px;
+    border: 3px solid orange;
+    color: orange; }
   #display button:nth-child(2), #preview-display button:nth-child(2) {
-    right: 10px; }
+    right: 10px;
+    border: 3px solid #aa0000;
+    color: #aa0000; }
 
 /*# sourceMappingURL=style.css.map */
