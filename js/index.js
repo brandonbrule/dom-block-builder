@@ -82,11 +82,9 @@ function rgbtohex(color){
 // Toggle Buildemode
 toggle_buildmode.addEventListener('click', function(){
 
-  if ( left_container.style.display === 'none' ){
-    left_container.style.display ='block';
+  if ( build_controls_container.style.display === 'none' ){
     build_controls_container.style.display = 'block';
   } else { 
-    left_container.style.display ='none';
     build_controls_container.style.display = 'none';
   }
   
@@ -126,9 +124,9 @@ function updateStats(){
   var total_spans = display.getElementsByTagName('span');
   var total_spans_length = total_spans.length;
 
-  stat_blocks_placed.innerHTML = "Blocks: " + total_spans_length;
+  stat_blocks_placed.innerHTML = total_spans_length;
 
-  stat_castle_height.innerHTML = "Height: " + display.scrollHeight;
+  stat_castle_height.innerHTML = display.scrollHeight;
 };
 
 
@@ -419,6 +417,8 @@ function editBlock(event){
   place_button_el.style.display = 'none';
 
   placeBlock();
+
+  build_controls_container.style.display = 'block';
 
 };
 

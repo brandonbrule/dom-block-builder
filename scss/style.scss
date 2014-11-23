@@ -67,30 +67,33 @@ body{
   background-size: cover;
 }
 
-label:before{ border: 1px solid #cecece; color: #cecece; padding: 0.25rem }
-input{  }
+p{
+  margin: 0;
+}
 
 
 .buildmode, .left-controls, .controls{
-  background :rgba(255,255,255,0.9);
+  background :rgba(255,255,255,0.95);
+  position:fixed;
+  z-index:10;
 }
 
 
 .buildmode{
-  position:fixed;
-  z-index:10;
-  top:0px;
-  left:10px;
   padding:0.5rem 1rem;
+  width: 275px;
+  top: 0;
+  right: 110px;
+  input{
+    float:right;
+  }
 }
 
 
 .left-controls{
-  position:fixed;
-  z-index:10;
-  top:40px;
-  left:10px;
-  padding:1rem;
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
 }
 
 .zoom-container{
@@ -113,12 +116,10 @@ input{  }
 .controls{
   width: 275px;
   list-style: none;
-  padding: 2.5rem 1.5rem;
+  padding: 1.5rem;
   box-shadow: -1px 1px 4px 0px #666;
-  position: fixed;
   right: 110px;
-  top: 0;
-  z-index: 1;
+  top: 40px;
 
   .col-container{
     margin-top: 1em;
@@ -129,7 +130,7 @@ input{  }
 
 
   label{ display: block; }
-  input{ 
+  input, textarea{ 
     display: block;
     width: 100%;
   }
@@ -180,8 +181,11 @@ input{  }
 .col-container{
   @extend .clearfix;
   margin: 0 auto;
-  &:hover button{
-    opacity: 1;
+  &:hover{
+    
+    button{
+      opacity: 1;
+    }
   }
 
   span{
@@ -199,6 +203,9 @@ input{  }
   transition:all 0.3s ease;
   cursor:pointer;
   &:hover{
+    outline: 2px solid #53a7ea;
+    position:relative;
+    z-index:2;
     box-shadow: inset 0 0 0 25px #53a7ea;
   }
 }
@@ -209,6 +216,12 @@ input{  }
     button{
       opacity: 1;
     }
+    .col-container{
+      outline: 2px solid #53a7ea;
+      position:relative;
+      z-index:2;
+      box-shadow: inset 0 0 0 25px #53a7ea;
+    }
   }
 }
 
@@ -216,7 +229,7 @@ input{  }
   position: absolute;
   cursor:pointer;
   top:3px;
-  z-index:1;
+  z-index:5;
   color: rgb(170, 0, 0);
   background: #fff;
   opacity: 0;

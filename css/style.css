@@ -19,27 +19,26 @@ body {
   -o-background-size: cover;
   background-size: cover; }
 
-label:before {
-  border: 1px solid #cecece;
-  color: #cecece;
-  padding: 0.25rem; }
+p {
+  margin: 0; }
 
 .buildmode, .left-controls, .controls {
-  background: rgba(255, 255, 255, 0.9); }
+  background: rgba(255, 255, 255, 0.95);
+  position: fixed;
+  z-index: 10; }
 
 .buildmode {
-  position: fixed;
-  z-index: 10;
-  top: 0px;
-  left: 10px;
-  padding: 0.5rem 1rem; }
+  padding: 0.5rem 1rem;
+  width: 275px;
+  top: 0;
+  right: 110px; }
+  .buildmode input {
+    float: right; }
 
 .left-controls {
-  position: fixed;
-  z-index: 10;
-  top: 40px;
-  left: 10px;
-  padding: 1rem; }
+  top: 0;
+  left: 0;
+  padding: 0.5rem; }
 
 .zoom-container {
   position: relative; }
@@ -54,19 +53,17 @@ label:before {
 .controls {
   width: 275px;
   list-style: none;
-  padding: 2.5rem 1.5rem;
+  padding: 1.5rem;
   box-shadow: -1px 1px 4px 0px #666;
-  position: fixed;
   right: 110px;
-  top: 0;
-  z-index: 1; }
+  top: 40px; }
   .controls .col-container {
     margin-top: 1em; }
     .controls .col-container:first-child {
       margin-top: 0; }
   .controls label {
     display: block; }
-  .controls input {
+  .controls input, .controls textarea {
     display: block;
     width: 100%; }
   .controls ul {
@@ -125,16 +122,24 @@ label:before {
   transition: all 0.3s ease;
   cursor: pointer; }
   #display .col-container:hover, #preview-display .col-container:hover {
+    outline: 2px solid #53a7ea;
+    position: relative;
+    z-index: 2;
     box-shadow: inset 0 0 0 25px #53a7ea; }
 
 #display section:hover button, #preview-display section:hover button {
   opacity: 1; }
+#display section:hover .col-container, #preview-display section:hover .col-container {
+  outline: 2px solid #53a7ea;
+  position: relative;
+  z-index: 2;
+  box-shadow: inset 0 0 0 25px #53a7ea; }
 
 #display button, #preview-display button {
   position: absolute;
   cursor: pointer;
   top: 3px;
-  z-index: 1;
+  z-index: 5;
   color: #aa0000;
   background: #fff;
   opacity: 0;
