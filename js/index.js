@@ -1,4 +1,8 @@
 
+
+
+
+
 var toggle_buildmode = document.getElementById('toggle-buildmode');
 
 
@@ -29,14 +33,26 @@ var invert_colours_el = document.getElementById('invert-colours');
 var castle_history = [];
 
 
-
+// ---- If you come from a url --- //
 // URL Stuff
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
-
-
 var castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
-castle_history_url_string_container.innerHTML = castle_history_url_string;
 
+
+// If it comes from a url
+// If someone sends you a link of a castle.
+if(window.location.hash) {
+ var hash_value = window.location.hash.replace('#', '');
+ var hash_to_array = decodeURIComponent(hash_value);
+ display.innerHTML = '';
+ createCastleFromString(hash_to_array);
+ updateStats();
+} else {
+  createCastleFromString(localStorage.getItem('CastleHistory'));
+}
+
+// Update URL TextArea
+castle_history_url_string_container.innerHTML = castle_history_url_string;
 
 
 
@@ -60,28 +76,26 @@ function rgbtohex(color){
 
 
 
+// Toggle Buildemode
+toggle_buildmode.addEventListener('click', function(){
 
-function scanAllAndSetCastleHistory(){
-  var rows = display.getElementsByTagName('article');
-  var temparr=[];
-
-  for ( var i = 0, len = rows.length; i < len; i++ ){
-    var container_width = parseInt(rows[i].style.width);
-    var block_height = parseInt(rows[i].lastChild.style.height);
-    var number_of_columns = parseInt(rows[i].children.length);
-    var spacing = parseInt(rows[i].lastChild.style.marginLeft);
-    var block_colour = rgbtohex( rows[i].lastChild.style.background );
-    var background_colour = rgbtohex( rows[i].style.background );
-
-    temparr.unshift([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
+  if ( left_container.style.display === 'none' ){
+    left_container.style.display ='block';
+    build_controls_container.style.display = 'block';
+  } else { 
+    left_container.style.display ='none';
+    build_controls_container.style.display = 'none';
   }
+  
+});
 
-  // Local Storage Build History
-  castle_history = temparr;
 
-  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
-  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
-}
+// Magnification
+magnification_el.addEventListener('input', function(){
+  group_display.style.transform = 'scale(' + magnification_el.value * 0.1 + ')';
+});
+
+
 
 
 
@@ -98,19 +112,21 @@ function createCastleFromString(string){
 }
 
 
-// If someone sends you a link of a castle.
-if(window.location.hash) {
- var hash_value = window.location.hash.replace('#', '');
- var hash_to_array = decodeURIComponent(hash_value);
- display.innerHTML = '';
- createCastleFromString(hash_to_array);
- updateStats();
-} else {
-  createCastleFromString(localStorage.getItem('CastleHistory'));
-}
 
 
 
+
+function updateStats(){
+  var stats_container = document.getElementById('stats-container');
+  var stat_blocks_placed = document.getElementById('stat-blocks-placed');
+  var stat_castle_height = document.getElementById('stat-castle-height');
+  var total_spans = display.getElementsByTagName('span');
+  var total_spans_length = total_spans.length;
+
+  stat_blocks_placed.innerHTML = "Blocks: " + total_spans_length;
+
+  stat_castle_height.innerHTML = "Height: " + display.scrollHeight;
+};
 
 
 
@@ -149,7 +165,6 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
 };
 
 
-
 // Create and Style Columns and the Container
 function createCols(container_width, int_block_height, col_width, number_of_columns, spacing, whole_container, block_colour, background_colour){
   var col_container = document.createElement('article');
@@ -163,6 +178,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   // Col Wrapper
   col_container_wrapper.style.position = 'relative';
   col_container_wrapper.style.width = '100%';
+
   
 
   
@@ -173,6 +189,13 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
 
   col_container.addEventListener('click', copyBlocks);
 
+
+  var editButton = document.createElement('button'),
+      editButtonCtx = document.createTextNode('edit');
+
+      editButton.appendChild(editButtonCtx);
+      editButton.addEventListener('click', editBlock);
+      col_container_wrapper.appendChild(editButton);
 
 
   // Create Close Button Element
@@ -185,7 +208,8 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
 
     closeButton.onclick = function () {
       col_container_wrapper.parentNode.removeChild(col_container_wrapper);
-      scanAllAndSetCastleHistory();
+      display = document.getElementById('display');
+      scanAllAndSetCastleHistory(display);
     };
   
 
@@ -216,6 +240,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   cols[0].style.marginLeft = '0';
   
 };
+
 
 
 
@@ -277,6 +302,57 @@ function previewBuild(){
 
 
 
+function saveBlock(){
+  
+  preview_display = document.getElementById('preview-display');
+  var number_of_columns = document.getElementById('number-of-columns').value;
+  var spacing = document.getElementById('margin-width').value;
+  var block_height = document.getElementById('block-height').value;
+  var container_width = document.getElementById('container-width').value;
+
+  var block_colour = document.getElementById('block-colour').value;
+  var background_colour = document.getElementById('background-colour').value;
+
+  // Remove Preview Display
+  preview_display.innerHTML = '';
+
+  // Place Objects
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
+
+  // Update Stats
+  updateStats();
+
+
+  display = document.getElementById('display');
+  scanAllAndSetCastleHistory(display);
+};
+
+
+function scanAllAndSetCastleHistory(display){
+  var rows = display.getElementsByTagName('article');
+  var temparr=[];
+
+  for ( var i = 0, len = rows.length; i < len; i++ ){
+    var container_width = parseInt(rows[i].style.width);
+    var block_height = parseInt(rows[i].lastChild.style.height);
+    var number_of_columns = parseInt(rows[i].children.length);
+    var spacing = parseInt(rows[i].lastChild.style.marginLeft);
+    var block_colour = rgbtohex( rows[i].lastChild.style.background );
+    var background_colour = rgbtohex( rows[i].style.background );
+
+    temparr.unshift([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
+  }
+
+  castle_history = temparr;
+
+  // Local Storage Build History
+  localStorage.removeItem('CastleHistory');
+  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
+
+  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+}
+
+
 
 // Place Block Control
 function placeBlock(){
@@ -288,25 +364,18 @@ function placeBlock(){
   var block_colour = document.getElementById('block-colour').value;
   var background_colour = document.getElementById('background-colour').value;
 
-
   // Remove Preview Display
   preview_display.innerHTML = '';
-
-
-  // Local Storage Build History
-  castle_history.push([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
-
-  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
-  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
-  
 
   // Place Objects
   calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
 
-  
-
   // Update Stats
   updateStats();
+
+
+  display = document.getElementById('display');
+  scanAllAndSetCastleHistory(display);
 
 };
 
@@ -315,7 +384,10 @@ function placeBlock(){
 
 // Copy Blocks
 function copyBlocks(event){
-  var col_container = this;
+  display = document.getElementById('display');
+  preview_display = document.getElementById('preview-display');
+
+  var col_container = event.target.parentNode;
   var container_width = parseInt(this.style.width);
   var block_height = parseInt(this.scrollHeight);
   var cols = col_container.children;
@@ -339,19 +411,31 @@ function copyBlocks(event){
 
 
 
+function editBlock(event){
+
+  var col_container = this.parentNode.getElementsByTagName('article')[0];
+  var container_width = parseInt(col_container.style.width);
+  var block_height = parseInt(col_container.scrollHeight);
+  var cols = col_container.children;
+  var number_of_columns = cols.length;
+  var spacing = parseInt(col_container.lastChild.style.marginLeft);
+  var block_colour = cols[0].style.background;
+  var background_colour = col_container.style.background;
+
+  // Set Control Input Values
+  number_of_columns_el.value = number_of_columns;
+  spacing_el.value = spacing;
+  block_height_el.value = block_height;
+  container_width_el.value = container_width;
+  block_colour_el.value = rgbtohex( block_colour );
+  background_colour_el.value = rgbtohex( background_colour );
 
 
+  preview_display = this.parentNode;
+  display = this.parentNode;
 
-function updateStats(){
-  var stats_container = document.getElementById('stats-container');
-  var stat_blocks_placed = document.getElementById('stat-blocks-placed');
-  var stat_castle_height = document.getElementById('stat-castle-height');
-  var total_spans = display.getElementsByTagName('span');
-  var total_spans_length = total_spans.length;
+  placeBlock();
 
-  stat_blocks_placed.innerHTML = "Blocks: " + total_spans_length;
-
-  stat_castle_height.innerHTML = "Height: " + display.scrollHeight;
 };
 
 
@@ -359,23 +443,8 @@ function updateStats(){
 
 
 
-// Toggle Buildemode
-toggle_buildmode.addEventListener('click', function(){
 
-  if ( left_container.style.display === 'none' ){
-    left_container.style.display ='block';
-    build_controls_container.style.display = 'block';
-  } else { 
-    left_container.style.display ='none';
-    build_controls_container.style.display = 'none';
-  }
-  
-});
 
-// Magnification
-magnification_el.addEventListener('input', function(){
-  group_display.style.transform = 'scale(' + magnification_el.value * 0.1 + ')';
-});
 
 
 
