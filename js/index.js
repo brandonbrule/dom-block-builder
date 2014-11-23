@@ -32,7 +32,7 @@ var save_button_el = document.getElementById('save-block');
 var place_button_el = document.getElementById('place-block');
 
 
-
+// Array of Information Built
 var castle_history = [];
 
 
@@ -49,7 +49,7 @@ if(window.location.hash) {
  var hash_to_array = decodeURIComponent(hash_value);
  display.innerHTML = '';
  createCastleFromString(hash_to_array);
- updateStats();
+ 
 } else {
   createCastleFromString(localStorage.getItem('CastleHistory'));
 }
@@ -79,40 +79,16 @@ function rgbtohex(color){
 
 
 
-// Toggle Buildemode
-toggle_buildmode.addEventListener('click', function(){
 
-  if ( build_controls_container.style.display === 'none' ){
-    build_controls_container.style.display = 'block';
-  } else { 
-    build_controls_container.style.display = 'none';
-  }
-  
-});
-
-
-// Magnification
-magnification_el.addEventListener('input', function(){
-  group_display.style.transform = 'scale(' + magnification_el.value * 0.1 + ')';
-});
-
-
-
-
-
-// LOAD FROM LOCAL STORAGE
+// LOAD FROM LOCAL STORAGE OR URL
 function createCastleFromString(string){
-
   var CastleHistory = JSON.parse(string);
-
   for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
     castle_history.push(CastleHistory[i]);
     calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
   }
-
+  updateStats();
 }
-
-
 
 
 
@@ -128,7 +104,6 @@ function updateStats(){
 
   stat_castle_height.innerHTML = display.scrollHeight;
 };
-
 
 
 
@@ -181,8 +156,6 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   col_container_wrapper.style.width = '100%';
 
   
-
-  
   // col-container
   col_container.setAttribute('class', 'col-container');
   col_container.style.width = container_width + '%';
@@ -191,6 +164,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   col_container.addEventListener('click', copyBlocks);
 
 
+  // Edit Button
   var editButton = document.createElement('button'),
       editButtonCtx = document.createTextNode('edit');
 
@@ -199,13 +173,12 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
       col_container_wrapper.appendChild(editButton);
 
 
-  // Create Close Button Element
+  // Close Button
     var closeButton = document.createElement('button'),
         closeCtx = document.createTextNode('x');
 
     closeButton.appendChild(closeCtx);
     col_container_wrapper.appendChild(closeButton);
-
 
     closeButton.onclick = function () {
       col_container_wrapper.parentNode.removeChild(col_container_wrapper);
@@ -215,7 +188,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   
 
 
-  // The Columns
+  // Create and Style Columns
   for (var i = 0, len = number_of_columns; i < len; i++){
     col = document.createElement('span');
     col.style.display = 'block';
@@ -232,8 +205,6 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   col_container_wrapper.appendChild(col_container);
 
   whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
-
-
   
 
   // Run Correct First Margin 
@@ -267,8 +238,28 @@ spacing_el.addEventListener('input', previewBuild);
 block_height_el.addEventListener('input', previewBuild);
 container_width_el.addEventListener('input', previewBuild);
 
+// On Colour Change
 block_colour_el.addEventListener('input', previewBuild);
 background_colour_el.addEventListener('input', previewBuild);
+
+
+// Toggle Buildemode
+toggle_buildmode.addEventListener('click', function(){
+
+  if ( build_controls_container.style.display === 'none' ){
+    build_controls_container.style.display = 'block';
+  } else { 
+    build_controls_container.style.display = 'none';
+  }
+  
+});
+
+
+// Magnification
+magnification_el.addEventListener('input', function(){
+  group_display.style.transform = 'scale(' + magnification_el.value * 0.1 + ')';
+});
+
 
 
 // Invert Colours
@@ -281,28 +272,6 @@ invert_colours_el.addEventListener('click', function(){
 
   previewBuild()
 });
-
-
-
-// Preview View Display Changes
-function previewBuild(){
-  var number_of_columns = document.getElementById('number-of-columns').value;
-  var spacing = document.getElementById('margin-width').value;
-  var block_height = document.getElementById('block-height').value;
-  var container_width = document.getElementById('container-width').value;
-
-  var block_colour = document.getElementById('block-colour').value;
-  var background_colour = document.getElementById('background-colour').value;
-  
-
-  preview_display.innerHTML = '';
-
-  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
-  
-};
-
-
-
 
 
 
@@ -328,7 +297,42 @@ function scanAllAndSetCastleHistory(){
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
 
   castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+
+
+  // Update Stats
+  updateStats();
+
 }
+
+
+
+
+
+// Preview View Display Changes
+// Grabs values from inputs
+// Clears and rebuilds boxes on change
+// Doesn't touch history or localstorage.
+function previewBuild(){
+  var number_of_columns = document.getElementById('number-of-columns').value;
+  var spacing = document.getElementById('margin-width').value;
+  var block_height = document.getElementById('block-height').value;
+  var container_width = document.getElementById('container-width').value;
+
+  var block_colour = document.getElementById('block-colour').value;
+  var background_colour = document.getElementById('background-colour').value;
+  
+  preview_display.innerHTML = '';
+
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
+
+};
+
+
+
+
+
+
+
 
 
 
@@ -349,9 +353,6 @@ function placeBlock(){
 
   // Place Objects
   calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
-
-  // Update Stats
-  updateStats();
 
 
   display = document.getElementById('display');
@@ -391,6 +392,7 @@ function copyBlocks(event){
 
 
 
+
 function editBlock(event){
 
   var col_container = this.parentNode.getElementsByTagName('article')[0];
@@ -402,6 +404,11 @@ function editBlock(event){
   var block_colour = cols[0].style.background;
   var background_colour = col_container.style.background;
 
+
+  // Open Up Build Controls if Hidden
+  build_controls_container.style.display = 'block';
+
+
   // Set Control Input Values
   number_of_columns_el.value = number_of_columns;
   spacing_el.value = spacing;
@@ -410,17 +417,19 @@ function editBlock(event){
   block_colour_el.value = rgbtohex( block_colour );
   background_colour_el.value = rgbtohex( background_colour );
 
-
+  // Set Preview Display and Display Box to this element
+  // So Controls update the edited container and placeBlock
+  // Sets the new box to where it was. (The one you being edited)
   preview_display = this.parentNode;
   display = this.parentNode;
   save_button_el.style.display='block';
   place_button_el.style.display = 'none';
 
+  // Place block
   placeBlock();
 
-  build_controls_container.style.display = 'block';
-
 };
+
 
 
 function saveBlock(){
@@ -432,22 +441,18 @@ function saveBlock(){
   var block_colour = document.getElementById('block-colour').value;
   var background_colour = document.getElementById('background-colour').value;
 
-
-  // Place Objects
-  //calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
-
-  // Update Stats
-  updateStats();
-
-
+  // Reset Display and Preview containers
   display = document.getElementById('display');
   preview_display = document.getElementById('preview-display');
   preview_display.innerHTML = '';
 
+  // Show Place Block, hide save block button.
   save_button_el.style.display='none';
   place_button_el.style.display = 'block';
 
+  // Update LocalStorage
   scanAllAndSetCastleHistory();
+
 };
 
 
