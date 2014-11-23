@@ -25,16 +25,6 @@
 
 
 <div id="build-controls-container" class="controls">
-  <div class="col-container">
-    <div class="control-group">
-      <label>Magnification</label>
-    </div>
-    <div class="control-group">
-      <input id="magnification" type="range" min="2.5" max="10" step="2.5" value="10">
-    </div>
-  </div>
-
-  <hr>
 
   <div class="col-container">
     <div class="control-group">
@@ -81,6 +71,15 @@
     <input type="button" id="save-block" style="display:none" onclick="saveBlock()" value="Save Block">
     <input type="button" id="place-block" onclick="placeBlock()" value="Place Block">
     <input type="button" onclick="clearAll()" value="Clear All">
+  </div>
+
+  <div class="col-container">
+    <div class="control-group">
+      <label>Magnification</label>
+    </div>
+    <div class="control-group">
+      <input id="magnification" type="range" min="2.5" max="10" step="2.5" value="10">
+    </div>
   </div>
 
   <hr>
