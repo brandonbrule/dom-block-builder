@@ -27,12 +27,12 @@ var castle_history = [];
 
 
 // Test PlaceHolder Values
-var number_of_columns = number_of_columns_el.value;
-var spacing = spacing_el.value;
-var block_height = block_height_el.value;
-var container_width = container_width_el.value;
-var block_colour = block_colour_el.value;
-var background_colour = background_colour_el.value;
+var number_of_columns;
+var spacing;
+var block_height;
+var container_width;
+var block_colour;
+var background_colour;
 
 
 
@@ -269,12 +269,12 @@ invert_colours_el.addEventListener('click', function(){
 
 
 function getControlValues(){
-  number_of_columns = document.getElementById('number-of-columns').value;
-  spacing = document.getElementById('margin-width').value;
-  block_height = document.getElementById('block-height').value;
-  container_width = document.getElementById('container-width').value;
-  block_colour = document.getElementById('block-colour').value;
-  background_colour = document.getElementById('background-colour').value;
+  number_of_columns = number_of_columns_el.value;
+  spacing = spacing_el.value;
+  block_height = block_height_el.value;
+  container_width = container_width_el.value;
+  block_colour = block_colour_el.value;
+  background_colour = background_colour_el.value;
 };
 
 
