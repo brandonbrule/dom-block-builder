@@ -28,6 +28,9 @@ var background_colour_el = document.getElementById('background-colour');
 
 var invert_colours_el = document.getElementById('invert-colours');
 
+var save_button_el = document.getElementById('save-block');
+var place_button_el = document.getElementById('place-block');
+
 
 
 var castle_history = [];
@@ -209,7 +212,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
     closeButton.onclick = function () {
       col_container_wrapper.parentNode.removeChild(col_container_wrapper);
       display = document.getElementById('display');
-      scanAllAndSetCastleHistory(display);
+      scanAllAndSetCastleHistory();
     };
   
 
@@ -302,33 +305,10 @@ function previewBuild(){
 
 
 
-function saveBlock(){
-  
-  preview_display = document.getElementById('preview-display');
-  var number_of_columns = document.getElementById('number-of-columns').value;
-  var spacing = document.getElementById('margin-width').value;
-  var block_height = document.getElementById('block-height').value;
-  var container_width = document.getElementById('container-width').value;
-
-  var block_colour = document.getElementById('block-colour').value;
-  var background_colour = document.getElementById('background-colour').value;
-
-  // Remove Preview Display
-  preview_display.innerHTML = '';
-
-  // Place Objects
-  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
-
-  // Update Stats
-  updateStats();
 
 
-  display = document.getElementById('display');
-  scanAllAndSetCastleHistory(display);
-};
 
-
-function scanAllAndSetCastleHistory(display){
+function scanAllAndSetCastleHistory(){
   var rows = display.getElementsByTagName('article');
   var temparr=[];
 
@@ -354,6 +334,8 @@ function scanAllAndSetCastleHistory(display){
 
 
 
+
+
 // Place Block Control
 function placeBlock(){
   var number_of_columns = document.getElementById('number-of-columns').value;
@@ -375,7 +357,7 @@ function placeBlock(){
 
 
   display = document.getElementById('display');
-  scanAllAndSetCastleHistory(display);
+  scanAllAndSetCastleHistory();
 
 };
 
@@ -394,16 +376,16 @@ function copyBlocks(event){
   var number_of_columns = cols.length;
   var spacing = parseInt(this.lastChild.style.marginLeft);
 
-  var block_colour = cols[0].style.background;
-  var background_colour = col_container.style.background;
+  var block_colour = cols[0].style.backgroundColor;
+  var background_colour = col_container.style.backgroundColor;
 
   number_of_columns_el.value = number_of_columns;
   spacing_el.value = spacing;
   block_height_el.value = block_height;
   container_width_el.value = container_width;
 
-  block_colour_el.value = rgbtohex( block_colour );
-  background_colour_el.value = rgbtohex( background_colour );
+  block_colour_el.value = rgbtohex( block_colour.toString() );
+  background_colour_el.value = rgbtohex( background_colour.toString() );
 
   placeBlock();
 
@@ -433,9 +415,39 @@ function editBlock(event){
 
   preview_display = this.parentNode;
   display = this.parentNode;
+  save_button_el.style.display='block';
+  place_button_el.style.display = 'none';
 
   placeBlock();
 
+};
+
+
+function saveBlock(){
+  var number_of_columns = document.getElementById('number-of-columns').value;
+  var spacing = document.getElementById('margin-width').value;
+  var block_height = document.getElementById('block-height').value;
+  var container_width = document.getElementById('container-width').value;
+
+  var block_colour = document.getElementById('block-colour').value;
+  var background_colour = document.getElementById('background-colour').value;
+
+
+  // Place Objects
+  //calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
+
+  // Update Stats
+  updateStats();
+
+
+  display = document.getElementById('display');
+  preview_display = document.getElementById('preview-display');
+  preview_display.innerHTML = '';
+
+  save_button_el.style.display='none';
+  place_button_el.style.display = 'block';
+
+  scanAllAndSetCastleHistory();
 };
 
 
