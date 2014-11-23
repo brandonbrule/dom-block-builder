@@ -465,18 +465,3 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   cols[0].style.marginLeft = '0';
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
