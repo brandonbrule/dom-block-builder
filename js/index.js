@@ -1,3 +1,7 @@
+// -------------------------- //
+//   Global Variables     //
+// -------------------------- //
+
 // Display and Preview Containers
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
@@ -39,7 +43,9 @@ var castle_history = [];
 
 
 
-// ---- If you come from a url --- //
+// -------------------------- //
+//  From URL                  //
+// -------------------------- //
 // URL Stuff
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
 var castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
@@ -59,7 +65,6 @@ if(window.location.hash) {
 // Update URL TextArea
 castle_history_url_string_container.innerHTML = castle_history_url_string;
 
-
 // LOAD FROM LOCAL STORAGE OR URL
 function createCastleFromString(string){
   var CastleHistory = JSON.parse(string);
@@ -74,6 +79,12 @@ function createCastleFromString(string){
 
 
 
+
+
+
+// -------------------------- //
+//   Global Helpers           //
+// -------------------------- //
 
 // Convert RGB to HEX Return String with Hash
 function rgbtohex(color){
@@ -124,10 +135,9 @@ function updateStats(){
 
 
 
-//-------------- Build Controls --------------//
-//---------------------------------------------//
-
-// Preview Changes
+// -------------------------- //
+//   Block Build Controls     //
+// -------------------------- //
 
 // Preview Slide Events
 // I'm lazy, thats why they are like this.
@@ -172,6 +182,20 @@ invert_colours_el.addEventListener('click', function(){
 });
 
 
+
+
+// Preview View Display Changes
+// Grabs values from inputs
+// Clears and rebuilds boxes on change
+// Doesn't touch history or localstorage.
+function previewBuild(){
+  getControlValues();
+  preview_display.innerHTML = '';
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
+};
+
+
+
 // Get Input Values
 // It needs to check and set the values with each event triggered.
 function getControlValues(){
@@ -184,6 +208,7 @@ function getControlValues(){
 };
 
 
+// Global Site Scan And Object/LocalStorage Creation
 function scanAllAndSetCastleHistory(){
   var rows = display.getElementsByTagName('article');
   var temparr=[];
@@ -217,20 +242,6 @@ function scanAllAndSetCastleHistory(){
 
 
 
-// Preview View Display Changes
-// Grabs values from inputs
-// Clears and rebuilds boxes on change
-// Doesn't touch history or localstorage.
-function previewBuild(){
-
-  // Get Values from Inputs
-  getControlValues();
-  
-  preview_display.innerHTML = '';
-
-  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
-
-};
 
 
 
@@ -239,9 +250,9 @@ function previewBuild(){
 
 
 
-
-
-
+// ----------------------------- //
+// Block Set and Edit Controls   //
+// ----------------------------- //
 
 // Place Block Control
 function placeBlock(){
@@ -249,10 +260,10 @@ function placeBlock(){
   // Get Values from Control Inputs
   getControlValues();
 
-  // Remove Preview Display
+  // Clear Preview Display
   preview_display.innerHTML = '';
 
-  // Place Objects
+  // Create Blocks
   calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
 
   // Reset the display block to display in case you were editing.
@@ -264,53 +275,55 @@ function placeBlock(){
 };
 
 
-
-
 // Copy Blocks
 function copyBlock(event){
-  display = document.getElementById('display');
-  preview_display = document.getElementById('preview-display');
 
+  // Set Column Container Element from One Clicked
   var col_container = event.target.parentNode;
-  var container_width = parseInt(this.style.width);
-  var block_height = parseInt(this.scrollHeight);
   var cols = col_container.children;
-  var number_of_columns = cols.length;
-  var spacing = parseInt(this.lastChild.style.marginLeft);
 
-  var block_colour = cols[0].style.backgroundColor;
-  var background_colour = col_container.style.backgroundColor;
+  // Get Block Information from The One Clicked
+  container_width = parseInt(this.style.width);
+  block_height = parseInt(this.scrollHeight);
+  number_of_columns = cols.length;
+  spacing = parseInt(this.lastChild.style.marginLeft);
+  block_colour = cols[0].style.backgroundColor;
+  background_colour = col_container.style.backgroundColor;
 
+  // Set Build Input Values
   number_of_columns_el.value = number_of_columns;
   spacing_el.value = spacing;
   block_height_el.value = block_height;
   container_width_el.value = container_width;
-
   block_colour_el.value = rgbtohex( block_colour.toString() );
   background_colour_el.value = rgbtohex( background_colour.toString() );
 
+  // Set Displays to Creation Locations
+  display = document.getElementById('display');
+  preview_display = document.getElementById('preview-display');
+
+  // Place Block
   placeBlock();
 
 }
 
 
-
-
 function editBlock(event){
 
+  // Set Column Container Element from One Clicked
   var col_container = this.parentNode.getElementsByTagName('article')[0];
-  var container_width = parseInt(col_container.style.width);
-  var block_height = parseInt(col_container.scrollHeight);
   var cols = col_container.children;
-  var number_of_columns = cols.length;
-  var spacing = parseInt(col_container.lastChild.style.marginLeft);
-  var block_colour = cols[0].style.background;
-  var background_colour = col_container.style.background;
 
+  // Get Block Information from The One Clicked
+  container_width = parseInt(col_container.style.width);
+  block_height = parseInt(col_container.scrollHeight);
+  number_of_columns = cols.length;
+  spacing = parseInt(col_container.lastChild.style.marginLeft);
+  block_colour = cols[0].style.background;
+  background_colour = col_container.style.background;
 
   // Open Up Build Controls if Hidden
   build_controls_container.style.display = 'block';
-
 
   // Set Control Input Values
   number_of_columns_el.value = number_of_columns;
@@ -332,7 +345,6 @@ function editBlock(event){
   placeBlock();
 
 };
-
 
 
 function saveBlock(){
@@ -364,8 +376,9 @@ function saveBlock(){
 
 
 
-
-// Build Blocks
+// -------------------------- //
+// Build Blocks DOM Creation //
+// -------------------------- //
 
 // Column Creation and Math
 // Equal Spaced Equation
