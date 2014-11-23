@@ -313,6 +313,7 @@ function copyBlock(event){
   new_display.insertBefore(new_container, the_section);
 
   display = new_container;
+  preview_display = new_container;
 
   // Place Block
   placeBlock();
