@@ -63,7 +63,7 @@ if(window.location.hash) {
   var home_el = document.getElementById('back-home');
   home_el.style.display = 'none';
   createCastleFromString(localStorage.getItem('CastleHistory'));
-  
+
 }
 
 // Update URL TextArea
@@ -276,6 +276,8 @@ function placeBlock(){
 };
 
 
+
+// Should Copy And Above Element
 // Copy Blocks
 function copyBlock(event){
 
@@ -302,6 +304,15 @@ function copyBlock(event){
   // Set Displays to Creation Locations
   display = document.getElementById('display');
   preview_display = document.getElementById('preview-display');
+
+
+  // Create Container Above The One Selected
+  var new_display = col_container.parentNode.parentNode;
+  var new_container = document.createElement('div');
+  var the_section = col_container.parentNode;
+  new_display.insertBefore(new_container, the_section);
+
+  display = new_container;
 
   // Place Block
   placeBlock();
