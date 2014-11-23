@@ -72,7 +72,7 @@ p{
 }
 
 
-.buildmode, .left-controls, .controls{
+.buildmode, .controls{
   background :rgba(255,255,255,0.95);
   position:fixed;
   z-index:10;
@@ -89,12 +89,6 @@ p{
   }
 }
 
-
-.left-controls{
-  top: 0;
-  left: 0;
-  padding: 0.5rem;
-}
 
 .zoom-container{
   position:relative;
