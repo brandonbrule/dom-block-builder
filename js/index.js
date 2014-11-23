@@ -57,9 +57,13 @@ if(window.location.hash) {
  var hash_to_array = decodeURIComponent(hash_value);
  display.innerHTML = '';
  createCastleFromString(hash_to_array);
+ build_controls_container.style.display = 'none';
  
 } else {
+  var home_el = document.getElementById('back-home');
+  home_el.style.display = 'none';
   createCastleFromString(localStorage.getItem('CastleHistory'));
+  
 }
 
 // Update URL TextArea
@@ -74,9 +78,6 @@ function createCastleFromString(string){
   }
   updateStats();
 }
-
-
-
 
 
 
