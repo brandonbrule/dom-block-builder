@@ -1,10 +1,12 @@
-var toggle_buildmode = document.getElementById('toggle-buildmode');
-
-var build_controls_container = document.getElementById('build-controls-container');
-
+// Display and Preview Containers
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
 
+// Controls Container and Toggle
+var toggle_buildmode = document.getElementById('toggle-buildmode');
+var build_controls_container = document.getElementById('build-controls-container');
+
+// Control Elements
 var number_of_columns_el = document.getElementById('number-of-columns');
 var spacing_el = document.getElementById('margin-width');
 var block_height_el = document.getElementById('block-height');
@@ -12,27 +14,27 @@ var container_width_el = document.getElementById('container-width');
 var block_colour_el = document.getElementById('block-colour');
 var background_colour_el = document.getElementById('background-colour');
 var invert_colours_el = document.getElementById('invert-colours');
-
 var save_button_el = document.getElementById('save-block');
 var place_button_el = document.getElementById('place-block');
 
-// Magnification Container
-var group_display = document.getElementById('group-display');
-var magnification_el = document.getElementById('magnification');
-
-
-// Array of Information Built
-var castle_history = [];
-
-
-
-// Test PlaceHolder Values
+// Input Values for Calculations
 var number_of_columns;
 var spacing;
 var block_height;
 var container_width;
 var block_colour;
 var background_colour;
+
+// Magnification Container
+var group_display = document.getElementById('group-display');
+var magnification_el = document.getElementById('magnification');
+
+// Array of Block History
+var castle_history = [];
+
+
+
+
 
 
 
@@ -268,6 +270,8 @@ invert_colours_el.addEventListener('click', function(){
 });
 
 
+// Get Input Values
+// It needs to check and set the values with each event triggered.
 function getControlValues(){
   number_of_columns = number_of_columns_el.value;
   spacing = spacing_el.value;
@@ -317,6 +321,7 @@ function scanAllAndSetCastleHistory(){
 // Doesn't touch history or localstorage.
 function previewBuild(){
 
+  // Get Values from Inputs
   getControlValues();
   
   preview_display.innerHTML = '';
