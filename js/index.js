@@ -91,8 +91,10 @@ function rgbtohex(color){
 }
 
 
-
+// Clear Everything, localstorage and playboard.
 function clearAll(){
+  display = document.getElementById('display');
+  preview = document.getElementById('preview-display');
   display.innerHTML = '';
   preview_display.innerHTML = '';
   castle_history_url_string_container.innerHTML = '';
@@ -102,7 +104,7 @@ function clearAll(){
 }
 
 
-
+// Update block Stats
 function updateStats(){
   var stats_container = document.getElementById('stats-container');
   var stat_blocks_placed = document.getElementById('stat-blocks-placed');
@@ -113,106 +115,6 @@ function updateStats(){
   stat_blocks_placed.innerHTML = total_spans_length;
   stat_castle_height.innerHTML = display.scrollHeight;
 };
-
-
-
-
-
-// Equal Spaced Equation
-// Parse All Inputs as Numbers
-// Calculate Size and Margin and Send those values off to create the columns.
-function calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container){
-  var int_number_of_columns = parseInt(number_of_columns);
-  var int_spacing = parseInt(spacing);
-  var int_container_width = parseInt(container_width);
-  var int_block_height = parseInt(block_height);
-
-  // Column Measurements
-  var remaining_num_of_cols = int_number_of_columns - 1;
-  var total_margin_spacing = remaining_num_of_cols * int_spacing;
-  var remaining_width_after_margin = 100 - total_margin_spacing;
-  var col_width = remaining_width_after_margin / int_number_of_columns;
-  
-  createCols(container_width, int_block_height, col_width, int_number_of_columns, int_spacing, whole_container, block_colour, background_colour);
-};
-
-
-// Create and Style Columns and the Container
-function createCols(container_width, int_block_height, col_width, number_of_columns, spacing, whole_container, block_colour, background_colour){
-  var col_container = document.createElement('article');
-  var col;
-  var col_style_width;
-  var col_style_margin;
-  var whole_container = whole_container;
-  var col_container_wrapper = document.createElement('section');
-
-
-  // Col Wrapper
-  col_container_wrapper.style.position = 'relative';
-  col_container_wrapper.style.width = '100%';
-
-  
-  // col-container
-  col_container.setAttribute('class', 'col-container');
-  col_container.style.width = container_width + '%';
-  col_container.style.background = background_colour;
-
-  col_container.addEventListener('click', copyBlock);
-
-
-  // Edit Button
-  var editButton = document.createElement('button'),
-      editButtonCtx = document.createTextNode('edit');
-
-      editButton.appendChild(editButtonCtx);
-      editButton.addEventListener('click', editBlock);
-      col_container_wrapper.appendChild(editButton);
-
-
-  // Close Button
-    var closeButton = document.createElement('button'),
-        closeCtx = document.createTextNode('x');
-
-    closeButton.appendChild(closeCtx);
-    col_container_wrapper.appendChild(closeButton);
-
-    closeButton.onclick = function () {
-      col_container_wrapper.parentNode.removeChild(col_container_wrapper);
-      display = document.getElementById('display');
-      scanAllAndSetCastleHistory();
-    };
-  
-
-
-  // Create and Style Columns
-  for (var i = 0, len = number_of_columns; i < len; i++){
-    col = document.createElement('span');
-    col.style.display = 'block';
-    col.style.background = block_colour;
-    col.style.width = col_width + '%';
-    col.style.marginLeft = spacing + '%';
-    col.style.float = 'left';
-    col.style.height = int_block_height + 'px';
-    
-    col_container.appendChild(col);
-  }
-
-
-  col_container_wrapper.appendChild(col_container);
-
-  whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
-  
-
-  // Run Correct First Margin 
-  var cols = col_container.getElementsByTagName('span');
-  cols[0].style.marginLeft = '0';
-  
-};
-
-
-
-
-
 
 
 
@@ -453,6 +355,103 @@ function saveBlock(){
 };
 
 
+
+
+
+
+
+
+
+
+
+
+// Build Blocks
+
+// Column Creation and Math
+// Equal Spaced Equation
+// Parse All Inputs as Numbers
+// Calculate Size and Margin and Send those values off to create the columns.
+function calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container){
+
+  // Make sure everything's a number
+  container_width = parseInt(container_width);
+  block_height = parseInt(block_height);
+  number_of_columns = parseInt(number_of_columns);
+  spacing = parseInt(spacing);
+
+
+  // Calculate Columns Measurements
+  var remaining_num_of_cols = number_of_columns - 1;
+  var total_margin_spacing = remaining_num_of_cols * spacing;
+  var remaining_width_after_margin = 100 - total_margin_spacing;
+  var col_width = remaining_width_after_margin / number_of_columns;
+  
+
+  // Container Elements
+  var col_container_wrapper = document.createElement('section');
+  var col_container = document.createElement('article');
+  var col;
+  var editButton = document.createElement('button');
+  var editButtonCtx = document.createTextNode('edit');
+  var closeButton = document.createElement('button');
+  var closeCtx = document.createTextNode('x');
+  var col_style_width;
+  var col_style_margin;
+
+
+  // Col Wrapper
+  col_container_wrapper.style.position = 'relative';
+  col_container_wrapper.style.width = '100%';
+
+  
+  // Col Container
+  col_container.setAttribute('class', 'col-container');
+  col_container.style.width = container_width + '%';
+  col_container.style.background = background_colour;
+
+  col_container.addEventListener('click', copyBlock);
+
+
+  // Edit Button
+  editButton.appendChild(editButtonCtx);
+  col_container_wrapper.appendChild(editButton);
+  editButton.addEventListener('click', editBlock);
+
+
+  // Close Button
+  closeButton.appendChild(closeCtx);
+  col_container_wrapper.appendChild(closeButton);
+  closeButton.onclick = function () {
+    col_container_wrapper.parentNode.removeChild(col_container_wrapper);
+    display = document.getElementById('display');
+    scanAllAndSetCastleHistory();
+  };
+  
+
+  // Each Column
+  for (var i = 0, len = number_of_columns; i < len; i++){
+    col = document.createElement('span');
+    col.style.display = 'block';
+    col.style.background = block_colour;
+    col.style.width = col_width + '%';
+    col.style.marginLeft = spacing + '%';
+    col.style.float = 'left';
+    col.style.height = block_height + 'px';
+    
+    col_container.appendChild(col);
+  }
+
+
+  // Append It All
+  col_container_wrapper.appendChild(col_container);
+  whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
+  
+
+  // Remove First Column Margin 
+  var cols = col_container.getElementsByTagName('span');
+  cols[0].style.marginLeft = '0';
+
+};
 
 
 
