@@ -1,20 +1,7 @@
-
-
-
-
-
 var toggle_buildmode = document.getElementById('toggle-buildmode');
-
-
-
-var left_container = document.getElementById('left-controls-container');
-var magnification_el = document.getElementById('magnification');
-
-
 
 var build_controls_container = document.getElementById('build-controls-container');
 
-var group_display = document.getElementById('group-display');
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
 
@@ -22,25 +9,38 @@ var number_of_columns_el = document.getElementById('number-of-columns');
 var spacing_el = document.getElementById('margin-width');
 var block_height_el = document.getElementById('block-height');
 var container_width_el = document.getElementById('container-width');
-
 var block_colour_el = document.getElementById('block-colour');
 var background_colour_el = document.getElementById('background-colour');
-
 var invert_colours_el = document.getElementById('invert-colours');
 
 var save_button_el = document.getElementById('save-block');
 var place_button_el = document.getElementById('place-block');
+
+// Magnification Container
+var group_display = document.getElementById('group-display');
+var magnification_el = document.getElementById('magnification');
 
 
 // Array of Information Built
 var castle_history = [];
 
 
+
+// Test PlaceHolder Values
+var number_of_columns = number_of_columns_el.value;
+var spacing = spacing_el.value;
+var block_height = block_height_el.value;
+var container_width = container_width_el.value;
+var block_colour = block_colour_el.value;
+var background_colour = background_colour_el.value;
+
+
+
+
 // ---- If you come from a url --- //
 // URL Stuff
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
 var castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
-
 
 // If it comes from a url
 // If someone sends you a link of a castle.
@@ -58,10 +58,22 @@ if(window.location.hash) {
 castle_history_url_string_container.innerHTML = castle_history_url_string;
 
 
+// LOAD FROM LOCAL STORAGE OR URL
+function createCastleFromString(string){
+  var CastleHistory = JSON.parse(string);
+  for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
+    castle_history.push(CastleHistory[i]);
+    calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
+  }
+  updateStats();
+}
 
 
 
 
+
+
+// Convert RGB to HEX Return String with Hash
 function rgbtohex(color){
   if (color.substr(0, 1) === '#') {
         return color;
@@ -78,18 +90,14 @@ function rgbtohex(color){
 
 
 
-
-
-// LOAD FROM LOCAL STORAGE OR URL
-function createCastleFromString(string){
-  var CastleHistory = JSON.parse(string);
-  for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
-    castle_history.push(CastleHistory[i]);
-    calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
-  }
-  updateStats();
+function clearAll(){
+  display.innerHTML = '';
+  preview_display.innerHTML = '';
+  castle_history_url_string_container.innerHTML = '';
+  localStorage.removeItem('CastleHistory');
+  castle_history = [];
+  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
 }
-
 
 
 
@@ -101,22 +109,8 @@ function updateStats(){
   var total_spans_length = total_spans.length;
 
   stat_blocks_placed.innerHTML = total_spans_length;
-
   stat_castle_height.innerHTML = display.scrollHeight;
 };
-
-
-
-
-function clearAll(){
-  display.innerHTML = '';
-  preview_display.innerHTML = '';
-  castle_history_url_string_container.innerHTML = '';
-  localStorage.removeItem('CastleHistory');
-  castle_history = [];
-  localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
-}
-
 
 
 
@@ -161,7 +155,7 @@ function createCols(container_width, int_block_height, col_width, number_of_colu
   col_container.style.width = container_width + '%';
   col_container.style.background = background_colour;
 
-  col_container.addEventListener('click', copyBlocks);
+  col_container.addEventListener('click', copyBlock);
 
 
   // Edit Button
@@ -274,6 +268,15 @@ invert_colours_el.addEventListener('click', function(){
 });
 
 
+function getControlValues(){
+  number_of_columns = document.getElementById('number-of-columns').value;
+  spacing = document.getElementById('margin-width').value;
+  block_height = document.getElementById('block-height').value;
+  container_width = document.getElementById('container-width').value;
+  block_colour = document.getElementById('block-colour').value;
+  background_colour = document.getElementById('background-colour').value;
+};
+
 
 function scanAllAndSetCastleHistory(){
   var rows = display.getElementsByTagName('article');
@@ -313,13 +316,8 @@ function scanAllAndSetCastleHistory(){
 // Clears and rebuilds boxes on change
 // Doesn't touch history or localstorage.
 function previewBuild(){
-  var number_of_columns = document.getElementById('number-of-columns').value;
-  var spacing = document.getElementById('margin-width').value;
-  var block_height = document.getElementById('block-height').value;
-  var container_width = document.getElementById('container-width').value;
 
-  var block_colour = document.getElementById('block-colour').value;
-  var background_colour = document.getElementById('background-colour').value;
+  getControlValues();
   
   preview_display.innerHTML = '';
 
@@ -340,13 +338,9 @@ function previewBuild(){
 
 // Place Block Control
 function placeBlock(){
-  var number_of_columns = document.getElementById('number-of-columns').value;
-  var spacing = document.getElementById('margin-width').value;
-  var block_height = document.getElementById('block-height').value;
-  var container_width = document.getElementById('container-width').value;
 
-  var block_colour = document.getElementById('block-colour').value;
-  var background_colour = document.getElementById('background-colour').value;
+  // Get Values from Control Inputs
+  getControlValues();
 
   // Remove Preview Display
   preview_display.innerHTML = '';
@@ -354,8 +348,10 @@ function placeBlock(){
   // Place Objects
   calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
 
-
+  // Reset the display block to display in case you were editing.
   display = document.getElementById('display');
+
+  // Scan and Update Local Storage
   scanAllAndSetCastleHistory();
 
 };
@@ -364,7 +360,7 @@ function placeBlock(){
 
 
 // Copy Blocks
-function copyBlocks(event){
+function copyBlock(event){
   display = document.getElementById('display');
   preview_display = document.getElementById('preview-display');
 
@@ -433,13 +429,9 @@ function editBlock(event){
 
 
 function saveBlock(){
-  var number_of_columns = document.getElementById('number-of-columns').value;
-  var spacing = document.getElementById('margin-width').value;
-  var block_height = document.getElementById('block-height').value;
-  var container_width = document.getElementById('container-width').value;
 
-  var block_colour = document.getElementById('block-colour').value;
-  var background_colour = document.getElementById('background-colour').value;
+  // Get Values from 
+  getControlValues();
 
   // Reset Display and Preview containers
   display = document.getElementById('display');
