@@ -22,6 +22,9 @@ body {
 p {
   margin: 0; }
 
+input[type='range'] {
+  width: 100%; }
+
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.95);
   position: fixed;
@@ -52,10 +55,6 @@ p {
   box-shadow: -1px 1px 4px 0px #666;
   right: 110px;
   top: 40px; }
-  .controls .col-container {
-    margin-top: 1em; }
-    .controls .col-container:first-child {
-      margin-top: 0; }
   .controls label {
     display: block; }
   .controls input, .controls textarea {
@@ -73,6 +72,17 @@ p {
       width: 100%;
       display: block;
       text-align: center; }
+
+.col-container {
+  margin: 1em auto; }
+  .col-container:hover button {
+    opacity: 1; }
+  .col-container:first-child {
+    margin-top: 0; }
+  .col-container span {
+    float: left; }
+  .col-container button {
+    opacity: 0; }
 
 .control-group {
   width: 45%;
@@ -104,14 +114,15 @@ p {
   .control-group-3:nth-child(3) {
     margin-top: 0; }
 
-.col-container {
-  margin: 0 auto; }
-  .col-container:hover button {
-    opacity: 1; }
-  .col-container span {
-    float: left; }
-  .col-container button {
-    opacity: 0; }
+.stats-url {
+  position: absolute;
+  top: 10px;
+  background: #fff;
+  z-index: 10;
+  left: 10px;
+  padding: 1.5rem;
+  width: 275px;
+  box-shadow: -1px 1px 4px 0px #666; }
 
 #display .col-container, #preview-display .col-container {
   transition: all 0.3s ease;

@@ -71,6 +71,10 @@ p{
   margin: 0;
 }
 
+input[type='range']{
+  width: 100%;
+}
+
 
 .buildmode, .controls{
   background :rgba(255,255,255,0.95);
@@ -115,13 +119,6 @@ p{
   right: 110px;
   top: 40px;
 
-  .col-container{
-    margin-top: 1em;
-    &:first-child{
-      margin-top: 0;
-    }
-  }
-
 
   label{ display: block; }
   input, textarea{ 
@@ -153,6 +150,26 @@ p{
 }
 
 
+.col-container{
+  @extend .clearfix;
+  margin: 1em auto;
+  &:hover{
+    button{
+      opacity: 1;
+    }
+  }
+  &:first-child{
+      margin-top: 0;
+    }
+
+  span{
+    float: left;
+  }
+  button{
+    opacity: 0;
+  }
+}
+
 .control-group{
   @include equalSpaced(2, 10%, 100%);
 }
@@ -163,32 +180,23 @@ p{
 
 
 
+.stats-url{
+  position: absolute;
+  top: 10px;
+  background: #fff;
+  z-index: 10;
+  left: 10px;
+  padding: 1.5rem;
+  width: 275px;
+  box-shadow: -1px 1px 4px 0px #666;
 
-
-
-
-
-
-
-
-
-.col-container{
-  @extend .clearfix;
-  margin: 0 auto;
-  &:hover{
-    
-    button{
-      opacity: 1;
-    }
-  }
-
-  span{
-    float: left;
-  }
-  button{
-    opacity: 0;
-  }
 }
+
+
+
+
+
+
 
 
 

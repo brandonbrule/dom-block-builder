@@ -12,7 +12,7 @@
 <body>
 
 <div class="buildmode">
-  <div>
+  <div id="toggle-controls-button-container">
     <label>Toggle Controls</label>
     <input type="checkbox" id="toggle-buildmode" checked>
   </div>
@@ -70,19 +70,12 @@
     <input type="button" onclick="clearAll()" value="Clear All">
   </div>
 
-  <div class="col-container">
-    <div class="control-group">
-      <label>Magnification</label>
-    </div>
-    <div class="control-group">
-      <input id="magnification" type="range" min="2.5" max="10" step="2.5" value="10">
-    </div>
-  </div>
+</div>
 
-  <hr>
 
+<div id="stats-url-container" class="stats-url">
   <div class="col-container">
-    <label>Share Castle</label>
+    <label>Share Blocks</label>
     <textarea id="castle-history-url-string-container" onclick="this.focus();this.select()" readonly="readonly"></textarea>
   </div>
 
@@ -95,6 +88,14 @@
     </div>
   </div>
 
+  <div class="col-container">
+    <div class="control-group">
+      <label>Magnification</label>
+    </div>
+    <div class="control-group">
+      <input id="magnification" type="range" min="2.5" max="10" step="2.5" value="10">
+    </div>
+  </div>
 </div>
 
 

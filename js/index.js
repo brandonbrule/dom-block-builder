@@ -29,6 +29,9 @@ var container_width;
 var block_colour;
 var background_colour;
 
+// Stats URL Container
+var stats_url_container = document.getElementById('stats-url-container');
+
 // Magnification Container
 var group_display = document.getElementById('group-display');
 var magnification_el = document.getElementById('magnification');
@@ -55,14 +58,17 @@ var castle_history_url_string = document.URL + '#' + encodeURIComponent(localSto
 if(window.location.hash) {
  var hash_value = window.location.hash.replace('#', '');
  var hash_to_array = decodeURIComponent(hash_value);
+
+ var toggle_controls_button_container = document.getElementById('toggle-controls-button-container');
+ toggle_controls_button_container.style.display = 'none';
  display.innerHTML = '';
- createCastleFromString(hash_to_array);
+ createCastleFromString(hash_to_array, 'no_events');
  build_controls_container.style.display = 'none';
  
 } else {
   var home_el = document.getElementById('back-home');
   home_el.style.display = 'none';
-  createCastleFromString(localStorage.getItem('CastleHistory'));
+  createCastleFromString(localStorage.getItem('CastleHistory'), 'has_events');
 
 }
 
@@ -70,14 +76,19 @@ if(window.location.hash) {
 castle_history_url_string_container.innerHTML = castle_history_url_string;
 
 // LOAD FROM LOCAL STORAGE OR URL
-function createCastleFromString(string){
+function createCastleFromString(string, events){
   var CastleHistory = JSON.parse(string);
   for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
     castle_history.push(CastleHistory[i]);
-    calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
+    if (events === 'has_events'){
+      calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
+    } else if (events === 'no_events') {
+      calculateAndBuildBlocksWithoutEvents(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
+    }
   }
   updateStats();
 }
+
 
 
 
@@ -157,8 +168,10 @@ toggle_buildmode.addEventListener('click', function(){
 
   if ( build_controls_container.style.display === 'none' ){
     build_controls_container.style.display = 'block';
+    stats_url_container.style.display = 'block';
   } else { 
     build_controls_container.style.display = 'none';
+    stats_url_container.style.display = 'none';
   }
   
 });
@@ -315,6 +328,9 @@ function copyBlock(event){
   display = new_container;
   preview_display = new_container;
 
+  save_button_el.style.display='block';
+  place_button_el.style.display = 'none';
+
   // Place Block
   placeBlock();
 
@@ -453,6 +469,70 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
     scanAllAndSetCastleHistory();
   };
   
+
+  // Each Column
+  for (var i = 0, len = number_of_columns; i < len; i++){
+    col = document.createElement('span');
+    col.style.display = 'block';
+    col.style.background = block_colour;
+    col.style.width = col_width + '%';
+    col.style.marginLeft = spacing + '%';
+    col.style.float = 'left';
+    col.style.height = block_height + 'px';
+    
+    col_container.appendChild(col);
+  }
+
+
+  // Append It All
+  col_container_wrapper.appendChild(col_container);
+  whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
+  
+
+  // Remove First Column Margin 
+  var cols = col_container.getElementsByTagName('span');
+  cols[0].style.marginLeft = '0';
+
+};
+
+
+
+// Column Creation and Math
+// Equal Spaced Equation
+// Parse All Inputs as Numbers
+// Calculate Size and Margin and Send those values off to create the columns.
+function calculateAndBuildBlocksWithoutEvents(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container){
+
+  // Make sure everything's a number
+  container_width = parseInt(container_width);
+  block_height = parseInt(block_height);
+  number_of_columns = parseInt(number_of_columns);
+  spacing = parseInt(spacing);
+
+
+  // Calculate Columns Measurements
+  var remaining_num_of_cols = number_of_columns - 1;
+  var total_margin_spacing = remaining_num_of_cols * spacing;
+  var remaining_width_after_margin = 100 - total_margin_spacing;
+  var col_width = remaining_width_after_margin / number_of_columns;
+  
+
+  // Container Elements
+  var col_container_wrapper = document.createElement('section');
+  var col_container = document.createElement('article');
+  var col;
+  var col_style_width;
+  var col_style_margin;
+
+  // Col Wrapper
+  col_container_wrapper.style.position = 'relative';
+  col_container_wrapper.style.width = '100%';
+  
+  // Col Container
+  col_container.setAttribute('class', 'col-container');
+  col_container.style.width = container_width + '%';
+  col_container.style.background = background_colour;
+
 
   // Each Column
   for (var i = 0, len = number_of_columns; i < len; i++){
