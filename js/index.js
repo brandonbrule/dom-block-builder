@@ -64,6 +64,13 @@ if(window.location.hash) {
  display.innerHTML = '';
  createCastleFromString(hash_to_array, 'no_events');
  build_controls_container.style.display = 'none';
+
+ toggle_controls_button_container.parentNode.appendChild(save_button_el);
+ save_button_el.value = 'Make This My Starting Point';
+ save_button_el.style.display="block";
+ save_button_el.style.marginTop = '15px';
+ save_button_el.style.float ='none';
+
  
 } else {
   var home_el = document.getElementById('back-home');
