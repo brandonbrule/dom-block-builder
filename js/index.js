@@ -339,6 +339,11 @@ function copyBlock(event){
 
 function editBlock(event){
 
+  // Reset First In Case you Keep Spamming Edit
+  preview_display = document.getElementById('preview-display');
+  display = document.getElementById('display');
+
+
   // Set Column Container Element from One Clicked
   var col_container = this.parentNode.getElementsByTagName('article')[0];
   var cols = col_container.children;
