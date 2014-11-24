@@ -124,6 +124,9 @@ input[type='range'] {
   width: 275px;
   box-shadow: -1px 1px 4px 0px #666; }
 
+#group-display .col-container {
+  margin: 0 auto; }
+
 #display .col-container, #preview-display .col-container {
   transition: all 0.3s ease;
   cursor: pointer; }
