@@ -232,8 +232,8 @@ function scanAllAndSetCastleHistory(){
     var block_height = parseInt(rows[i].lastChild.style.height);
     var number_of_columns = parseInt(rows[i].children.length);
     var spacing = parseInt(rows[i].lastChild.style.marginLeft);
-    var block_colour = rgbtohex( rows[i].lastChild.style.background );
-    var background_colour = rgbtohex( rows[i].style.background );
+    var block_colour = rgbtohex( rows[i].lastChild.style.backgroundColor );
+    var background_colour = rgbtohex( rows[i].style.backgroundColor );
 
     temparr.unshift([container_width, block_height, number_of_columns, spacing, block_colour, background_colour]);
   }
@@ -353,8 +353,8 @@ function editBlock(event){
   block_height = parseInt(col_container.scrollHeight);
   number_of_columns = cols.length;
   spacing = parseInt(col_container.lastChild.style.marginLeft);
-  block_colour = cols[0].style.background;
-  background_colour = col_container.style.background;
+  block_colour = cols[0].style.backgroundColor;
+  background_colour = col_container.style.backgroundColor;
 
   // Open Up Build Controls if Hidden
   build_controls_container.style.display = 'block';
@@ -364,6 +364,8 @@ function editBlock(event){
   spacing_el.value = spacing;
   block_height_el.value = block_height;
   container_width_el.value = container_width;
+
+
   block_colour_el.value = rgbtohex( block_colour );
   background_colour_el.value = rgbtohex( background_colour );
 
