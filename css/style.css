@@ -28,6 +28,10 @@ input[type='range'] {
   position: relative;
   z-index: 100; }
 
+input[type='checkbox'] {
+  font-size: 2em;
+  padding: 1em; }
+
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.95); }
 
@@ -55,7 +59,9 @@ input[type='range'] {
   list-style: none;
   padding: 1.5rem;
   z-index: 10;
-  width: 100%; }
+  width: 100%;
+  position: relative;
+  z-index: 100; }
   @media screen and (min-width: 1020px) {
     .controls {
       position: fixed;
