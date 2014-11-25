@@ -26,39 +26,41 @@ input[type='range'] {
   margin-top: 1rem;
   width: 100%; }
 
-input[type='range'] {
-  -webkit-appearance: none;
-  height: 46px;
-  padding: 3px;
-  -webkit-border-radius: 15px;
-  border-radius: 15px;
-  border: 1px solid #525252;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(1, #222222)); }
+@media screen and (max-width: 1020px) {
+  input[type='range'] {
+    -webkit-appearance: none;
+    height: 46px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    background: #cecece; }
 
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 68px;
-  background: #fff;
-  height: 44px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; }
-
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 60px;
+    background: #fff;
+    height: 60px;
+    -webkit-border-radius: 50%; } }
 input[type='checkbox'] {
-  font-size: 2em;
-  padding: 1em; }
+  font-size: 1.5em;
+  padding: 0.5em; }
 
 .buildmode, .controls {
-  background: rgba(255, 255, 255, 0.95); }
+  background: #fff; }
+  @media screen and (min-width: 1020px) {
+    .buildmode, .controls {
+      background: rgba(255, 255, 255, 0.95); } }
 
 .buildmode {
-  position: fixed;
-  padding: 0.5rem 1rem;
-  width: 275px;
-  z-index: 10;
-  top: 0;
-  right: 110px; }
+  padding: 0.5rem 1rem; }
   .buildmode input {
     float: right; }
+  @media screen and (min-width: 1020px) {
+    .buildmode {
+      position: fixed;
+      width: 275px;
+      z-index: 10;
+      top: 0;
+      right: 110px; } }
 
 .zoom-container {
   position: relative; }
@@ -85,6 +87,8 @@ input[type='checkbox'] {
       right: 110px;
       top: 40px;
       bottom: auto; } }
+  .controls input[type='button'] {
+    padding: 1em; }
   .controls label {
     display: block; }
   .controls input, .controls textarea {
@@ -187,13 +191,10 @@ input[type='checkbox'] {
   z-index: 5;
   background: #fff;
   opacity: 0; }
-  #display button:first-child, #preview-display button:first-child {
-    right: 50px;
-    border: 3px solid orange;
-    color: orange; }
-  #display button:nth-child(2), #preview-display button:nth-child(2) {
+  #display button:nth-child(1), #preview-display button:nth-child(1) {
     right: 10px;
-    border: 3px solid #aa0000;
-    color: #aa0000; }
+    background: #aa0000;
+    border: none;
+    color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
