@@ -24,9 +24,16 @@ p {
 
 input[type='range'] {
   margin-top: 1rem;
-  width: 100%;
-  position: relative;
-  z-index: 100; }
+  width: 100%; }
+
+input[type='range'] {
+  -webkit-appearance: none;
+  height: 46px;
+  padding: 3px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  border: 1px solid #525252;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(1, #222222)); }
 
 input[type='checkbox'] {
   font-size: 2em;
