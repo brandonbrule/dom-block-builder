@@ -23,6 +23,7 @@ p {
   margin: 0; }
 
 input[type='range'] {
+  margin-top: 1rem;
   width: 100%;
   position: relative;
   z-index: 100; }
