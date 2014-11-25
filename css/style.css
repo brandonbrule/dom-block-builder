@@ -23,7 +23,9 @@ p {
   margin: 0; }
 
 input[type='range'] {
-  width: 100%; }
+  width: 100%;
+  position: relative;
+  z-index: 100; }
 
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.95); }
