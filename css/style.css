@@ -23,7 +23,12 @@ p {
   margin: 0; }
 
 input[type='range'] {
-  width: 100%; }
+  font-size: 2em;
+  padding: 1.5em; }
+  @media screen and (min-width: 1020px) {
+    input[type='range'] {
+      font-size: 1em;
+      padding: 0.85em; } }
 
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.95); }

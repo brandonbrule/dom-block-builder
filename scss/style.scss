@@ -77,7 +77,14 @@ p{
 }
 
 input[type='range']{
-  width: 100%;
+
+  font-size: 2em;
+  padding: 1.5em;
+
+  @media screen and ( min-width: $breakpoint-desktop ){
+    font-size: 1em;
+    padding: 0.85em;
+  }
 }
 
 
