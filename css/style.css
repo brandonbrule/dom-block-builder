@@ -87,17 +87,20 @@ input[type='checkbox'] {
       right: 110px;
       top: 40px;
       bottom: auto; } }
-  .controls input[type='button'] {
-    padding: 1em;
-    height: 46px; }
-    @media screen and (min-width: 1020px) {
-      .controls input[type='button'] {
-        height: auto; } }
   .controls label {
     display: block; }
   .controls input, .controls textarea {
     display: block;
     width: 100%; }
+  .controls input[type='button'] {
+    padding: 1em;
+    font-size: 1.5em;
+    margin-top: 2em; }
+    @media screen and (min-width: 1020px) {
+      .controls input[type='button'] {
+        height: auto;
+        margin-top: 0;
+        font-size: 1em; } }
   .controls ul {
     list-style: none;
     padding: 0;
@@ -110,6 +113,9 @@ input[type='checkbox'] {
       width: 100%;
       display: block;
       text-align: center; }
+  .controls .clear-all-button {
+    background: #aa0000;
+    color: #fff; }
 
 .col-container {
   margin: 1em auto; }
