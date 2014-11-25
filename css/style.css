@@ -88,7 +88,11 @@ input[type='checkbox'] {
       top: 40px;
       bottom: auto; } }
   .controls input[type='button'] {
-    padding: 1em; }
+    padding: 1em;
+    height: 46px; }
+    @media screen and (min-width: 1020px) {
+      .controls input[type='button'] {
+        height: auto; } }
   .controls label {
     display: block; }
   .controls input, .controls textarea {
