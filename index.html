@@ -22,6 +22,9 @@
 
 
 <div id="build-controls-container" class="controls">
+  <div class="col-container">
+    <div id="preview-controls-display"></div>
+  </div>
 
   <div class="col-container">
     <div class="control-group">
@@ -65,9 +68,15 @@
   <hr>
 
   <div class="col-container">
-    <input type="button" id="save-block" style="display:none" onclick="saveBlock()" value="Save Block">
-    <input type="button" id="place-block" onclick="placeBlock()" value="Place Block">
-    <input type="button" onclick="clearAll()" value="Clear All">
+    <div class="col-container">
+      <input type="button" id="save-block" style="display:none" onclick="saveBlock()" value="Save Block">
+    </div>
+    <div class="col-container">
+      <input type="button" id="place-block" onclick="placeBlock()" value="Place Block">
+    </div>
+    <div class="col-container">
+      <input type="button" onclick="clearAll()" value="Clear All">
+    </div>
   </div>
 
 </div>

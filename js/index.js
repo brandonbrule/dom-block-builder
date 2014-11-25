@@ -297,58 +297,13 @@ function placeBlock(){
 
 
 
-// Should Copy And Above Element
-// Copy Blocks
-function copyBlock(event){
-
-  // Set Column Container Element from One Clicked
-  var col_container = event.target.parentNode;
-  var cols = col_container.children;
-
-  // Get Block Information from The One Clicked
-  container_width = parseInt(this.style.width);
-  block_height = parseInt(this.scrollHeight);
-  number_of_columns = cols.length;
-  spacing = parseInt(this.lastChild.style.marginLeft);
-  block_colour = cols[0].style.backgroundColor;
-  background_colour = col_container.style.backgroundColor;
-
-  // Set Build Input Values
-  number_of_columns_el.value = number_of_columns;
-  spacing_el.value = spacing;
-  block_height_el.value = block_height;
-  container_width_el.value = container_width;
-  block_colour_el.value = rgbtohex( block_colour.toString() );
-  background_colour_el.value = rgbtohex( background_colour.toString() );
-
-  // Set Displays to Creation Locations
-  display = document.getElementById('display');
-  preview_display = document.getElementById('preview-display');
-
-
-  // Create Container Above The One Selected
-  var new_display = col_container.parentNode.parentNode;
-  var new_container = document.createElement('div');
-  var the_section = col_container.parentNode;
-  new_display.insertBefore(new_container, the_section);
-
-  display = new_container;
-  preview_display = new_container;
-
-  save_button_el.style.display='block';
-  place_button_el.style.display = 'none';
-
-  // Place Block
-  placeBlock();
-
-}
 
 
 function editBlock(event){
 
   // Reset First In Case you Keep Spamming Edit
-  preview_display = document.getElementById('preview-display');
-  display = document.getElementById('display');
+  //preview_display = document.getElementById('preview-display');
+  //display = document.getElementById('display');
 
 
   // Set Column Container Element from One Clicked
@@ -465,13 +420,9 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   col_container.style.width = container_width + '%';
   col_container.style.background = background_colour;
 
-  col_container.addEventListener('click', copyBlock);
+  col_container.addEventListener('click', editBlock);
 
 
-  // Edit Button
-  editButton.appendChild(editButtonCtx);
-  col_container_wrapper.appendChild(editButton);
-  editButton.addEventListener('click', editBlock);
 
 
   // Close Button
