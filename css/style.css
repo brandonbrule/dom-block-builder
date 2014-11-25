@@ -23,12 +23,7 @@ p {
   margin: 0; }
 
 input[type='range'] {
-  font-size: 2em;
-  padding: 1.5em; }
-  @media screen and (min-width: 1020px) {
-    input[type='range'] {
-      font-size: 1em;
-      padding: 0.85em; } }
+  width: 100%; }
 
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.95); }
@@ -60,7 +55,7 @@ input[type='range'] {
   z-index: 10;
   width: 100%;
   bottom: 0; }
-  @media screen and (min-width: 1020px) {
+  @media screen and (min-width: 960px) {
     .controls {
       box-shadow: -1px 1px 4px 0px #666;
       width: 275px;
@@ -133,7 +128,7 @@ input[type='range'] {
   box-shadow: -1px 1px 4px 0px #666;
   width: 100%;
   opacity: 0; }
-  @media screen and (min-width: 1020px) {
+  @media screen and (min-width: 960px) {
     .stats-url {
       position: absolute;
       opacity: 1;
