@@ -27,9 +27,12 @@ input[type='range'] {
   width: 100%; }
 
 @media screen and (max-width: 1020px) {
+  label {
+    display: none; }
+
   input[type='range'] {
     -webkit-appearance: none;
-    height: 4.5em;
+    height: 6.5em;
     -webkit-border-radius: 15px;
     border-radius: 15px;
     padding: 2.5em;
@@ -37,9 +40,9 @@ input[type='range'] {
 
   input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 4em;
+    width: 6em;
     background: #fff;
-    height: 4em;
+    height: 6em;
     -webkit-border-radius: 50%; } }
 input[type='checkbox'] {
   font-size: 1.5em;
