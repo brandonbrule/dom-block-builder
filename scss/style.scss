@@ -83,6 +83,7 @@ input[type='range']{
 
 
 @media screen and (max-width: $breakpoint-desktop){
+  .controls .col-container { margin: 2em 0;}
   label{ display: none; }
   input[type='range'] {
       -webkit-appearance: none;
@@ -99,6 +100,19 @@ input[type='range']{
       height: 6em;
       -webkit-border-radius: 50%;
   }
+
+  // Colours
+  .control-group-3{
+    display: none;
+  }
+
+  input[type='button']{
+    padding: 2em;
+    font-size: 2.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .clear-all-button{}
 }
 
 
@@ -175,18 +189,7 @@ input[type='checkbox']{
     width: 100%;
   }
 
-  input[type='button']{
-    padding: 1em;
-    font-size: 1.5em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    @media screen and ( min-width: $breakpoint-desktop ){
-      height: auto;
-      margin-bottom: 0;
-      margin-top: 0;
-      font-size: 1em;
-    }
-  }
+
 
 
   ul{
