@@ -81,15 +81,13 @@ input[type='range']{
   width: 100%;
 }
 
-
-
-
-
-
-
 input[type='checkbox']{
   font-size: 1.5em;
   padding: 0.5em;
+}
+
+textarea{
+  width: 100%;
 }
 
 
@@ -120,18 +118,14 @@ input[type='checkbox']{
 }
 
 
-.zoom-container{
-  position:relative;
-  input{
-    position: relative;
-    top:5px;
-  }
-}
-
 #stats-container{
   list-style:none;
   padding: 0;
 }
+
+
+
+
 
 
 .fixed-controls{

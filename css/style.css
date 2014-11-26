@@ -30,6 +30,9 @@ input[type='checkbox'] {
   font-size: 1.5em;
   padding: 0.5em; }
 
+textarea {
+  width: 100%; }
+
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.85); }
   @media screen and (min-width: 1020px) {
@@ -50,12 +53,6 @@ input[type='checkbox'] {
       z-index: 10;
       top: 0;
       right: 110px; } }
-
-.zoom-container {
-  position: relative; }
-  .zoom-container input {
-    position: relative;
-    top: 5px; }
 
 #stats-container {
   list-style: none;
