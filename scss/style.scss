@@ -171,7 +171,7 @@ input[type='checkbox']{
 .fixed-controls{
   @media screen and ( max-width: $breakpoint-desktop ){
     position:fixed;
-    top: bottom;
+    bottom: 0;
     left:0;
   }
 }
