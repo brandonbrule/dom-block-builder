@@ -336,8 +336,12 @@ function editBlock(event){
   // Sets the new box to where it was. (The one you being edited)
   preview_display = this.parentNode;
   display = this.parentNode;
-  save_button_el.style.display='block';
-  place_button_el.style.display = 'none';
+  save_button_el.parentNode.style.display='block';
+  place_button_el.parentNode.style.display = 'none';
+
+
+  // Set Fixed Controls Mobile
+  build_controls_container.classList.add("fixed-controls")
 
   // Place block
   placeBlock();
@@ -356,8 +360,11 @@ function saveBlock(){
   preview_display.innerHTML = '';
 
   // Show Place Block, hide save block button.
-  save_button_el.style.display='none';
-  place_button_el.style.display = 'block';
+  save_button_el.parentNode.style.display='none';
+  place_button_el.parentNode.style.display = 'block';
+
+  // Remove Fixed Class Controls Mobile
+  build_controls_container.classList.remove("fixed-controls")
 
   // Update LocalStorage
   scanAllAndSetCastleHistory();
