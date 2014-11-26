@@ -67,7 +67,7 @@ input[type='checkbox'] {
       background: rgba(255, 255, 255, 0.95); } }
 
 .buildmode {
-  padding: 0.5rem 1rem; }
+  padding: 1rem 1rem; }
   .buildmode input {
     float: right; }
   @media screen and (min-width: 1020px) {
