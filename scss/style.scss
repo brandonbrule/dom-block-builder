@@ -85,7 +85,7 @@ input[type='range']{
 @media screen and (max-width: $breakpoint-desktop){
   input[type='range'] {
       -webkit-appearance: none;
-      height: 3.5em;
+      height: 4.5em;
       -webkit-border-radius: 15px;
       border-radius: 15px;
       padding:2.5em;
@@ -93,9 +93,9 @@ input[type='range']{
   }
   input[type='range']::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 3em;
+      width: 4em;
       background:#fff;
-      height: 3em;
+      height: 4em;
       -webkit-border-radius: 50%;
   }
 }
@@ -148,7 +148,7 @@ input[type='checkbox']{
 
 .controls{
   list-style: none;
-  padding:2.5em;
+  padding:1.5em 3.5em;
   z-index: 10;
   width: 100%;
   position: relative;
