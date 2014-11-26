@@ -67,7 +67,7 @@ input[type='checkbox'] {
   padding: 0.5em; }
 
 .buildmode, .controls {
-  background: #fff; }
+  background: rgba(255, 255, 255, 0.85); }
   @media screen and (min-width: 1020px) {
     .buildmode, .controls {
       background: rgba(255, 255, 255, 0.95); } }

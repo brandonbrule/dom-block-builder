@@ -128,9 +128,9 @@ input[type='checkbox']{
 
 
 .buildmode, .controls{
-  background: #fff;
+  background: rgba(255,255,255,0.85);;
   @media screen and (min-width: $breakpoint-desktop){
-    background :rgba(255,255,255,0.95);
+    background:rgba(255,255,255,0.95);
   }
 }
 
