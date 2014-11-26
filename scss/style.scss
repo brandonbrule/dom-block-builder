@@ -266,6 +266,8 @@ input[type='checkbox']{
 
 
 
+
+
 .stats-url{
   padding: 1.5rem;
   background: #fff;
@@ -300,45 +302,57 @@ input[type='checkbox']{
 
 
 
-#display .col-container, #preview-display .col-container{
-  transition:all 0.3s ease;
-  cursor:pointer;
-  &:hover{
-    outline: 2px solid #53a7ea;
-    position:relative;
-    z-index:2;
-    box-shadow: inset 0 0 0 25px #53a7ea;
-  }
+.active-container{
+    background: #53a7ea;   
 }
 
 
-#display section, #preview-display section{
-  &:hover{
-    button{
-      opacity: 1;
-    }
-    .col-container{
+@media screen and (min-width: $breakpoint-desktop){
+
+  #display .col-container, #preview-display .col-container{
+    transition:all 0.3s ease;
+    cursor:pointer;
+    &:hover{
       outline: 2px solid #53a7ea;
       position:relative;
       z-index:2;
       box-shadow: inset 0 0 0 25px #53a7ea;
     }
   }
+
+
+  #display section, #preview-display section{
+    
+      &:hover{
+        button{
+          opacity: 1;
+        }
+        .col-container{
+          outline: 2px solid #53a7ea;
+          position:relative;
+          z-index:2;
+          box-shadow: inset 0 0 0 25px #53a7ea;
+        }
+      }
+    
+  }
+
 }
+
 
 #display button, #preview-display button{
   position: absolute;
   cursor:pointer;
-  top:3px;
+  top:0;
+  padding: 0.5em;
   z-index:5;
   background: #fff;
   opacity: 0;
-  &:nth-child(1){
-    right:10px;
-    background: rgb(170, 0, 0);
-    border: none;
-    color: #fff;
-  }
+  right:10px;
+  background: rgb(170, 0, 0);
+  border: none;
+  color: #fff;
+  
 }
 
 

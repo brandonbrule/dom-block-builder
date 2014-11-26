@@ -318,6 +318,8 @@ function editBlock(event){
   block_colour = cols[0].style.backgroundColor;
   background_colour = col_container.style.backgroundColor;
 
+
+
   // Open Up Build Controls if Hidden
   build_controls_container.style.display = 'block';
 
@@ -341,15 +343,27 @@ function editBlock(event){
 
 
   // Set Fixed Controls Mobile
-  build_controls_container.classList.add("fixed-controls")
+  build_controls_container.classList.add("fixed-controls");
+
+  // Add Active Class to Edit Container
+  removeActiveContainerClass();
+  this.parentNode.classList.add("active-container");
 
   // Place block
   placeBlock();
 
 };
 
+function removeActiveContainerClass(){
+  var active_containers = document.getElementsByClassName('active-container');
+  for (var i = 0, len = active_containers.length; i < len; i++){
+    active_containers[i].classList.remove("active-container");
+  }
+};
+
 
 function saveBlock(){
+  removeActiveContainerClass();
 
   // Get Values from 
   getControlValues();

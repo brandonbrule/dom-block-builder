@@ -199,34 +199,37 @@ input[type='checkbox'] {
 #group-display .col-container {
   margin: 0 auto; }
 
-#display .col-container, #preview-display .col-container {
-  transition: all 0.3s ease;
-  cursor: pointer; }
-  #display .col-container:hover, #preview-display .col-container:hover {
+.active-container {
+  background: #53a7ea; }
+
+@media screen and (min-width: 1020px) {
+  #display .col-container, #preview-display .col-container {
+    transition: all 0.3s ease;
+    cursor: pointer; }
+    #display .col-container:hover, #preview-display .col-container:hover {
+      outline: 2px solid #53a7ea;
+      position: relative;
+      z-index: 2;
+      box-shadow: inset 0 0 0 25px #53a7ea; }
+
+  #display section:hover button, #preview-display section:hover button {
+    opacity: 1; }
+  #display section:hover .col-container, #preview-display section:hover .col-container {
     outline: 2px solid #53a7ea;
     position: relative;
     z-index: 2;
-    box-shadow: inset 0 0 0 25px #53a7ea; }
-
-#display section:hover button, #preview-display section:hover button {
-  opacity: 1; }
-#display section:hover .col-container, #preview-display section:hover .col-container {
-  outline: 2px solid #53a7ea;
-  position: relative;
-  z-index: 2;
-  box-shadow: inset 0 0 0 25px #53a7ea; }
-
+    box-shadow: inset 0 0 0 25px #53a7ea; } }
 #display button, #preview-display button {
   position: absolute;
   cursor: pointer;
-  top: 3px;
+  top: 0;
+  padding: 0.5em;
   z-index: 5;
   background: #fff;
-  opacity: 0; }
-  #display button:nth-child(1), #preview-display button:nth-child(1) {
-    right: 10px;
-    background: #aa0000;
-    border: none;
-    color: #fff; }
+  opacity: 0;
+  right: 10px;
+  background: #aa0000;
+  border: none;
+  color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
