@@ -30,6 +30,9 @@ input[type='range'] {
   .controls .col-container {
     margin: 2em 0; }
 
+  hr {
+    display: none; }
+
   label {
     display: none; }
 
@@ -55,7 +58,10 @@ input[type='range'] {
     padding: 2em;
     font-size: 2.5em;
     margin-top: 1em;
-    margin-bottom: 1em; } }
+    margin-bottom: 1em; }
+
+  .clear-all-container {
+    display: none; } }
 input[type='checkbox'] {
   font-size: 1.5em;
   padding: 0.5em; }
@@ -128,9 +134,10 @@ input[type='checkbox'] {
       width: 100%;
       display: block;
       text-align: center; }
-  .controls .clear-all-button {
-    background: #aa0000;
-    color: #fff; }
+
+.clear-all-button {
+  background: #aa0000;
+  color: #fff; }
 
 .col-container {
   margin: 1em auto; }

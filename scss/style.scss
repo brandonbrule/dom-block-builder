@@ -84,6 +84,7 @@ input[type='range']{
 
 @media screen and (max-width: $breakpoint-desktop){
   .controls .col-container { margin: 2em 0;}
+  hr{display: none;}
   label{ display: none; }
   input[type='range'] {
       -webkit-appearance: none;
@@ -112,7 +113,8 @@ input[type='range']{
     margin-top: 1em;
     margin-bottom: 1em;
   }
-  .clear-all-button{}
+  .clear-all-container{display: none;}
+
 }
 
 
@@ -220,14 +222,18 @@ input[type='checkbox']{
       text-align:center;
     }
   }
+  
+
+}
+
 
   .clear-all-button{
     background: #aa0000;
     color:#fff;
   }
-  
 
-}
+
+
 
 
 .col-container{
