@@ -80,7 +80,7 @@ if(window.location.hash) {
 }
 
 // Update URL TextArea
-castle_history_url_string_container.innerHTML = castle_history_url_string;
+castle_history_url_string_container.value = castle_history_url_string;
 
 // LOAD FROM LOCAL STORAGE OR URL
 function createCastleFromString(string, events){
@@ -127,7 +127,7 @@ function clearAll(){
   preview = document.getElementById('preview-display');
   display.innerHTML = '';
   preview_display.innerHTML = '';
-  castle_history_url_string_container.innerHTML = '';
+  castle_history_url_string_container.value = '';
   localStorage.removeItem('CastleHistory');
   castle_history = [];
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
@@ -251,7 +251,7 @@ function scanAllAndSetCastleHistory(){
   localStorage.removeItem('CastleHistory');
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
 
-  castle_history_url_string_container.innerHTML = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+  castle_history_url_string_container.value = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
 
 
   // Update Stats
