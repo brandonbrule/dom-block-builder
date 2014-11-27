@@ -75,7 +75,15 @@ if(window.location.hash) {
 } else {
   var home_el = document.getElementById('back-home');
   home_el.style.display = 'none';
-  createCastleFromString(localStorage.getItem('CastleHistory'), 'has_events');
+
+  if (localStorage.getItem("CastleHistory") === null) {
+    // No Local Storage
+    createCastleFromString( JSON.stringify(castle_history), 'has_events' );
+  } else {
+    createCastleFromString( localStorage.getItem('CastleHistory'), 'has_events' );
+  }
+
+  
 
 }
 
