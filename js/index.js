@@ -58,18 +58,16 @@ var castle_history_url_string = document.URL + '#' + encodeURIComponent(localSto
 if(window.location.hash) {
  var hash_value = window.location.hash.replace('#', '');
  var hash_to_array = decodeURIComponent(hash_value);
-
+ var starting_point_button = document.getElementById('starting-point-button');
  var toggle_controls_button_container = document.getElementById('toggle-controls-button-container');
+
+ starting_point_button.style.display = 'block';
+
  toggle_controls_button_container.style.display = 'none';
  display.innerHTML = '';
  createCastleFromString(hash_to_array, 'no_events');
  build_controls_container.style.display = 'none';
 
- toggle_controls_button_container.parentNode.appendChild(save_button_el);
- save_button_el.value = 'Make This My Starting Point';
- save_button_el.style.display="block";
- save_button_el.style.marginTop = '15px';
- save_button_el.style.float ='none';
 
  
 } else {
@@ -87,8 +85,27 @@ if(window.location.hash) {
 
 }
 
+
+function makeThisMyStartingPoint(){
+  saveBlock();
+  window.location.replace('');
+}
+
+
+
+
+
 // Update URL TextArea
 castle_history_url_string_container.value = castle_history_url_string;
+
+
+
+
+
+
+
+
+
 
 // LOAD FROM LOCAL STORAGE OR URL
 function createCastleFromString(string, events){
