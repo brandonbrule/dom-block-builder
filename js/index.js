@@ -53,6 +53,14 @@ var castle_history = [];
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
 var castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
 
+if (localStorage.getItem("CastleHistory") === null) {
+  // No Local Storage
+  castle_history_url_string = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+} else {
+  castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
+}
+
+
 // If it comes from a url
 // If someone sends you a link of a castle.
 if(window.location.hash) {
@@ -62,14 +70,11 @@ if(window.location.hash) {
  var toggle_controls_button_container = document.getElementById('toggle-controls-button-container');
 
  starting_point_button.style.display = 'block';
-
  toggle_controls_button_container.style.display = 'none';
  display.innerHTML = '';
  createCastleFromString(hash_to_array, 'no_events');
  build_controls_container.style.display = 'none';
 
-
- 
 } else {
   var home_el = document.getElementById('back-home');
   home_el.style.display = 'none';
