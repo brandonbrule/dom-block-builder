@@ -132,10 +132,11 @@ if (localStorage.getItem('Iframe_History') === null) {
   var iframe_history_array = localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
 } else {
   var iframe_history_array = JSON.parse(localStorage.getItem('Iframe_History'));
+  displayHistoryFrames();
 }
 
 
-displayHistoryFramesOnLoad();
+
 
 
 function createHistoryFrames(){
@@ -156,13 +157,11 @@ function createHistoryFrames(){
   localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
   iframe_history_array = JSON.parse(localStorage.getItem('Iframe_History'));
 
-
-  displayHistoryFramesOnLoad();
-
+  displayHistoryFrames();
 }
 
 
-function displayHistoryFramesOnLoad(){
+function displayHistoryFrames(){
   var iframe_history_container = document.getElementById('iframe-history-container');
   var iframe;
 
