@@ -43,22 +43,29 @@ var castle_history = [];
 
 
 
-
-
-
 // -------------------------- //
 //  From URL                  //
 // -------------------------- //
 // URL Stuff
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
-var castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
+var castle_history_url_string;
 
+// If Local Storage Exists Load LocalStorage History
+
+// No Local Storage -- Local Storage === Null
 if (localStorage.getItem("CastleHistory") === null) {
-  // No Local Storage
-  castle_history_url_string = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+  // Empty Object
+  castle_history_url_string = encodeURIComponent(JSON.stringify(castle_history));
 } else {
-  castle_history_url_string = document.URL + '#' + encodeURIComponent(localStorage.getItem('CastleHistory'));
+  // Castle History From Local Storage
+  castle_history_url_string = encodeURIComponent(localStorage.getItem('CastleHistory'));
 }
+// Append url as Hashtag
+castle_history_url_string = document.URL + '#' + castle_history_url_string;
+
+
+
+
 
 
 // If it comes from a url
@@ -105,26 +112,79 @@ castle_history_url_string_container.value = castle_history_url_string;
 
 
 
-
-
-
-
-
-
-
 // LOAD FROM LOCAL STORAGE OR URL
-function createCastleFromString(string, events){
+function createCastleFromString(string, render_events){
   var CastleHistory = JSON.parse(string);
   for ( var i = 0, len = CastleHistory.length; i < len; i++ ){
     castle_history.push(CastleHistory[i]);
-    if (events === 'has_events'){
-      calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
-    } else if (events === 'no_events') {
-      calculateAndBuildBlocksWithoutEvents(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display);
-    }
+    calculateAndBuildBlocks(CastleHistory[i][0], CastleHistory[i][1], CastleHistory[i][2], CastleHistory[i][3], CastleHistory[i][4], CastleHistory[i][5], display, render_events);
   }
   updateStats();
 }
+
+
+
+var iframe_history_array = [];
+
+// LocalStorage   
+if (localStorage.getItem('Iframe_History') === null) {
+  var iframe_history_array = localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
+} else {
+  var iframe_history_array = JSON.parse(localStorage.getItem('Iframe_History'));
+}
+
+displayHistoryFramesOnLoad();
+
+
+function createHistoryFrames(){
+  var iframe_history_container = document.getElementById('iframe-history-container');
+  var iframe;
+  var iframe_history_localstorage;
+
+  iframe_history_container.innerHTML ='';
+
+  
+
+  // Add String to Value.
+  if ( iframe_history_array.length < 3 ){
+    iframe_history_array.unshift(castle_history_url_string);
+  } else {
+    iframe_history_array.pop();
+  }
+
+  var iframe_history_localstorage = localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
+
+
+  iframe_history_array = JSON.parse(localStorage.getItem('Iframe_History'));
+
+
+
+  for (var i = 0; i < 2; i++){
+    iframe = document.createElement('iframe');
+    iframe.setAttribute('src', iframe_history_array[i]);
+    iframe_history_container.appendChild(iframe);
+  }
+
+}
+
+
+function displayHistoryFramesOnLoad(){
+  var iframe_history_container = document.getElementById('iframe-history-container');
+  var iframe;
+
+  iframe_history_container.innerHTML ='';
+
+  for (var i = 0; i < 2; i++){
+    iframe = document.createElement('iframe');
+    iframe.setAttribute('src', iframe_history_array[i]);
+    iframe_history_container.appendChild(iframe);
+  }
+}
+
+
+
+
+
 
 
 
@@ -149,6 +209,9 @@ function rgbtohex(color){
     var rgb = blue | (green << 8) | (red << 16);
     return digits[1] + '#' + rgb.toString(16);
 }
+
+
+
 
 
 // Clear Everything, localstorage and playboard.
@@ -433,7 +496,7 @@ function saveBlock(){
 // Equal Spaced Equation
 // Parse All Inputs as Numbers
 // Calculate Size and Margin and Send those values off to create the columns.
-function calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container){
+function calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container, render_events){
 
   // Make sure everything's a number
   container_width = parseInt(container_width);
@@ -471,19 +534,11 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   col_container.style.width = container_width + '%';
   col_container.style.background = background_colour;
 
-  col_container.addEventListener('click', editBlock);
-
-
-
 
   // Close Button
   closeButton.appendChild(closeCtx);
   col_container_wrapper.appendChild(closeButton);
-  closeButton.onclick = function () {
-    col_container_wrapper.parentNode.removeChild(col_container_wrapper);
-    display = document.getElementById('display');
-    scanAllAndSetCastleHistory();
-  };
+  
   
 
   // Each Column
@@ -500,67 +555,17 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   }
 
 
-  // Append It All
-  col_container_wrapper.appendChild(col_container);
-  whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
-  
 
-  // Remove First Column Margin 
-  var cols = col_container.getElementsByTagName('span');
-  cols[0].style.marginLeft = '0';
+  if (render_events === 'has_events'){
+    // Edit
+    col_container.addEventListener('click', editBlock);
 
-};
-
-
-
-// Column Creation and Math
-// Equal Spaced Equation
-// Parse All Inputs as Numbers
-// Calculate Size and Margin and Send those values off to create the columns.
-function calculateAndBuildBlocksWithoutEvents(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container){
-
-  // Make sure everything's a number
-  container_width = parseInt(container_width);
-  block_height = parseInt(block_height);
-  number_of_columns = parseInt(number_of_columns);
-  spacing = parseInt(spacing);
-
-
-  // Calculate Columns Measurements
-  var remaining_num_of_cols = number_of_columns - 1;
-  var total_margin_spacing = remaining_num_of_cols * spacing;
-  var remaining_width_after_margin = 100 - total_margin_spacing;
-  var col_width = remaining_width_after_margin / number_of_columns;
-  
-
-  // Container Elements
-  var col_container_wrapper = document.createElement('section');
-  var col_container = document.createElement('article');
-  var col;
-  var col_style_width;
-  var col_style_margin;
-
-  // Col Wrapper
-  col_container_wrapper.style.position = 'relative';
-  col_container_wrapper.style.width = '100%';
-  
-  // Col Container
-  col_container.setAttribute('class', 'col-container');
-  col_container.style.width = container_width + '%';
-  col_container.style.background = background_colour;
-
-
-  // Each Column
-  for (var i = 0, len = number_of_columns; i < len; i++){
-    col = document.createElement('span');
-    col.style.display = 'block';
-    col.style.background = block_colour;
-    col.style.width = col_width + '%';
-    col.style.marginLeft = spacing + '%';
-    col.style.float = 'left';
-    col.style.height = block_height + 'px';
-    
-    col_container.appendChild(col);
+    // Delete Block
+    closeButton.onclick = function () {
+      col_container_wrapper.parentNode.removeChild(col_container_wrapper);
+      display = document.getElementById('display');
+      scanAllAndSetCastleHistory();
+    };
   }
 
 
