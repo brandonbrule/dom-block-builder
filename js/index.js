@@ -126,6 +126,7 @@ function createCastleFromString(string, render_events){
 
 var iframe_history_array = [];
 
+
 // LocalStorage   
 if (localStorage.getItem('Iframe_History') === null) {
   var iframe_history_array = localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
@@ -133,37 +134,30 @@ if (localStorage.getItem('Iframe_History') === null) {
   var iframe_history_array = JSON.parse(localStorage.getItem('Iframe_History'));
 }
 
+
 displayHistoryFramesOnLoad();
 
 
 function createHistoryFrames(){
   var iframe_history_container = document.getElementById('iframe-history-container');
   var iframe;
+  var a;
   var iframe_history_localstorage;
 
   iframe_history_container.innerHTML ='';
 
-  
+  iframe_history_array.unshift(castle_history_url_string_container.value);
 
   // Add String to Value.
-  if ( iframe_history_array.length < 3 ){
-    iframe_history_array.unshift(castle_history_url_string);
-  } else {
+  if ( iframe_history_array.length >= 3 ){
     iframe_history_array.pop();
   }
 
-  var iframe_history_localstorage = localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
-
-
+  localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
   iframe_history_array = JSON.parse(localStorage.getItem('Iframe_History'));
 
 
-
-  for (var i = 0; i < 2; i++){
-    iframe = document.createElement('iframe');
-    iframe.setAttribute('src', iframe_history_array[i]);
-    iframe_history_container.appendChild(iframe);
-  }
+  displayHistoryFramesOnLoad();
 
 }
 
@@ -174,10 +168,20 @@ function displayHistoryFramesOnLoad(){
 
   iframe_history_container.innerHTML ='';
 
-  for (var i = 0; i < 2; i++){
+  for (var i = 0; i < iframe_history_array.length; i++){
+    anchor = document.createElement('a');
+    anchor.style.padding = '1em';
+    anchor.style.background = '#53a7ea';
+    anchor.style.display = 'block';
+    anchor.style.margin = '1em 0 0 0';
+    anchor.setAttribute('href', iframe_history_array[i]);
+    anchor.setAttribute('target', '_blank');
+    
     iframe = document.createElement('iframe');
     iframe.setAttribute('src', iframe_history_array[i]);
-    iframe_history_container.appendChild(iframe);
+
+    anchor.appendChild(iframe);
+    iframe_history_container.appendChild(anchor);
   }
 }
 
