@@ -127,7 +127,7 @@ function createCastleFromString(string, render_events){
 var iframe_history_array = [];
 
 
-// LocalStorage   
+// Load information from localstorage or object.  
 if (localStorage.getItem('Iframe_History') === null) {
   var iframe_history_array = localStorage.setItem('Iframe_History', JSON.stringify(iframe_history_array));
 } else {
@@ -159,6 +159,7 @@ function createHistoryFrames(){
 
   displayHistoryFrames();
 }
+
 
 
 function displayHistoryFrames(){
@@ -397,12 +398,14 @@ function placeBlock(){
 
 function editBlock(event){
 
+
   // Reset First In Case you Keep Spamming Edit
   //preview_display = document.getElementById('preview-display');
   //display = document.getElementById('display');
 
 
   // Set Column Container Element from One Clicked
+  var col_container_wrapper = this.parentNode;
   var col_container = this.parentNode.getElementsByTagName('article')[0];
   var cols = col_container.children;
 
@@ -438,6 +441,20 @@ function editBlock(event){
   place_button_el.parentNode.style.display = 'none';
 
 
+
+  // Delete Block
+  var closeButton = document.createElement('button');
+  var closeCtx = document.createTextNode('x');
+  
+  closeButton.onclick = function () {
+    event.stopPropagation();
+    col_container_wrapper.parentNode.removeChild(col_container_wrapper);
+    display = document.getElementById('display');
+    scanAllAndSetCastleHistory();
+  };
+  
+
+
   // Set Fixed Controls Mobile
   build_controls_container.classList.add("fixed-controls");
 
@@ -446,7 +463,11 @@ function editBlock(event){
   this.parentNode.classList.add("active-container");
 
   // Place block
-  placeBlock();
+  //placeBlock();
+
+   // Close Button
+  closeButton.appendChild(closeCtx);
+  col_container_wrapper.appendChild(closeButton);
 
 };
 
@@ -521,8 +542,7 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   var col;
   var editButton = document.createElement('button');
   var editButtonCtx = document.createTextNode('edit');
-  var closeButton = document.createElement('button');
-  var closeCtx = document.createTextNode('x');
+
   var col_style_width;
   var col_style_margin;
 
@@ -536,11 +556,6 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   col_container.setAttribute('class', 'col-container');
   col_container.style.width = container_width + '%';
   col_container.style.background = background_colour;
-
-
-  // Close Button
-  closeButton.appendChild(closeCtx);
-  col_container_wrapper.appendChild(closeButton);
   
   
 
@@ -559,16 +574,10 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
 
 
 
-  if (render_events === 'has_events'){
+  if (render_events !== 'no_events'){
     // Edit
     col_container.addEventListener('click', editBlock);
 
-    // Delete Block
-    closeButton.onclick = function () {
-      col_container_wrapper.parentNode.removeChild(col_container_wrapper);
-      display = document.getElementById('display');
-      scanAllAndSetCastleHistory();
-    };
   }
 
 
