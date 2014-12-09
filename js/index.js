@@ -567,7 +567,7 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
     col.style.width = col_width + '%';
     col.style.marginLeft = spacing + '%';
     col.style.float = 'left';
-    col.style.height = block_height + 'px';
+    col.style.height = block_height + 'vh';
     
     col_container.appendChild(col);
   }
