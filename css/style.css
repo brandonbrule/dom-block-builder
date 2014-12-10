@@ -175,8 +175,13 @@ textarea, #castle-history-url-string-container {
     opacity: 1 !important;
     display: block; }
 
+#back-home {
+  display: none; }
+
 .hash #iframe-history-container, .hash #create-history-state-button {
   display: none; }
+.hash #back-home {
+  display: block; }
 
 .hash-iframe .preview-content, .hash-iframe .buildmode {
   display: none; }

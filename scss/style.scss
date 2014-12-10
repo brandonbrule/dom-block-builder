@@ -286,10 +286,17 @@ textarea, #castle-history-url-string-container{
 
 
 
+#back-home{
+  display: none;
+}
+
 // If From Hash
 .hash{
   #iframe-history-container, #create-history-state-button{
     display: none;
+  }
+  #back-home{
+    display: block;
   }
 }
 
