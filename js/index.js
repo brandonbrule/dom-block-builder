@@ -427,7 +427,7 @@ function editBlock(event){
 
   // Get Block Information from The One Clicked
   container_width = parseInt(col_container.style.width);
-  block_height = parseInt(col_container.scrollHeight);
+  block_height = parseInt(col_container.lastChild.style.height);
   number_of_columns = cols.length;
   spacing = parseInt(col_container.lastChild.style.marginLeft);
   block_colour = cols[0].style.backgroundColor;
