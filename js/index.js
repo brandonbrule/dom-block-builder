@@ -3,6 +3,7 @@
 // -------------------------- //
 
 // Display and Preview Containers
+var body = document.getElementsByTagName('body')[0];
 var display = document.getElementById('display');
 var preview_display = document.getElementById('preview-display');
 
@@ -76,6 +77,8 @@ if(window.location.hash) {
  var starting_point_button = document.getElementById('starting-point-button');
  var toggle_controls_button_container = document.getElementById('toggle-controls-button-container');
 
+ body.className = body.className + "hash";
+
  starting_point_button.style.display = 'block';
  toggle_controls_button_container.style.display = 'none';
  display.innerHTML = '';
@@ -96,6 +99,18 @@ if(window.location.hash) {
   
 
 }
+
+
+
+
+
+var isInIFrame = (window.location != window.parent.location) ? true : false;
+
+if (isInIFrame){
+  body.className = body.className + "-iframe";
+}
+
+
 
 
 function makeThisMyStartingPoint(){

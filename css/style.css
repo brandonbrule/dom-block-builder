@@ -175,6 +175,12 @@ textarea, #castle-history-url-string-container {
     opacity: 1 !important;
     display: block; }
 
+.hash #iframe-history-container, .hash #create-history-state-button {
+  display: none; }
+
+.hash-iframe .preview-content, .hash-iframe .buildmode {
+  display: none; }
+
 @media screen and (max-width: 1020px) {
   .controls .col-container {
     margin: 2em 0; }

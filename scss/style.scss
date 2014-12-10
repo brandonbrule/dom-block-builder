@@ -286,6 +286,20 @@ textarea, #castle-history-url-string-container{
 
 
 
+// If From Hash
+.hash{
+  #iframe-history-container, #create-history-state-button{
+    display: none;
+  }
+}
+
+// If From Loaded
+.hash-iframe{
+  .preview-content, .buildmode{
+    display: none;
+  }
+}
+
 
 
 
