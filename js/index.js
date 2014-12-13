@@ -135,6 +135,7 @@ function makeThisMyStartingPoint(){
 
 // Update URL TextArea
 castle_history_url_string_container.value = castle_history_url_string;
+castle_history_url_anchor.setAttribute('href', castle_history_url_string);
 
 
 
@@ -251,6 +252,7 @@ function clearAll(){
   display.innerHTML = '';
   preview_display.innerHTML = '';
   castle_history_url_string_container.value = '';
+  castle_history_url_anchor.setAttribute('href', '');
   localStorage.removeItem('CastleHistory');
   castle_history = [];
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
@@ -481,6 +483,7 @@ function scanAllAndSetCastleHistory(){
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
 
   castle_history_url_string_container.value = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+  castle_history_url_anchor.setAttribute('href', castle_history_url_string_container.value);
 
 
   // Update Stats
