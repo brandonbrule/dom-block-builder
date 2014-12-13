@@ -309,6 +309,32 @@ textarea, #castle-history-url-string-container{
 
 
 
+#preview-display{
+  background: #ececec;
+}
+
+// Building Section
+
+.block-section-container{
+  position: relative;
+  width: 100%;
+  .col-container{
+    .build-block{
+      &:first-child{
+        margin-left: 0!important;
+      }
+    }
+  }
+}
+
+.build-block{
+  display: block;
+  float: left;
+}
+
+
+
+
 
 
 // Mobile
@@ -358,7 +384,7 @@ textarea, #castle-history-url-string-container{
 @media screen and (min-width: $breakpoint-desktop){
 
   #display .col-container, #preview-display .col-container{
-    transition:all 0.3s ease;
+    //transition:all 0.3s ease;
     cursor:pointer;
     &:hover{
       outline: 2px solid #53a7ea;

@@ -30,6 +30,13 @@ var container_width;
 var block_colour;
 var background_colour;
 
+// Block Information
+var remaining_num_of_cols;
+var total_margin_spacing;
+var remaining_width_after_margin;
+var col_width;
+
+
 // Stats URL Container
 var stats_url_container = document.getElementById('stats-url-container');
 
@@ -271,27 +278,17 @@ function updateStats(){
 //   Block Build Controls     //
 // -------------------------- //
 
-// Preview Slide Events
-// I'm lazy, thats why they are like this.
-number_of_columns_el.addEventListener('input', previewBuild);
-spacing_el.addEventListener('input', previewBuild);
-block_height_el.addEventListener('input', previewBuild);
-container_width_el.addEventListener('input', previewBuild);
-
-// On Colour Change
-block_colour_el.addEventListener('input', previewBuild);
-background_colour_el.addEventListener('input', previewBuild);
-
-
 // Toggle Buildemode
 toggle_buildmode.addEventListener('click', function(){
 
   if ( build_controls_container.style.display === 'none' ){
     build_controls_container.style.display = 'block';
     stats_url_container.style.display = 'block';
+    document.getElementById('preview-display').style.display = 'block';
   } else { 
     build_controls_container.style.display = 'none';
     stats_url_container.style.display = 'none';
+    document.getElementById('preview-display').style.display = 'none';
   }
   
 });
@@ -304,35 +301,12 @@ magnification_el.addEventListener('input', function(){
 
 
 
-// Invert Colours
-invert_colours_el.addEventListener('click', function(){
-  var block_colour = document.getElementById('block-colour').value;
-  var background_colour = document.getElementById('background-colour').value;
-
-  block_colour_el.value = background_colour;
-  background_colour_el.value = block_colour;
-
-  previewBuild()
-});
 
 
-
-
-// Preview View Display Changes
-// Grabs values from inputs
-// Clears and rebuilds boxes on change
-// Doesn't touch history or localstorage.
-function previewBuild(){
-  getControlValues();
-  preview_display.innerHTML = '';
-  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
-};
-
-
+// --- Block Update Process --- //
 
 // Get Input Values
-// It needs to check and set the values with each event triggered.
-function getControlValues(){
+function getControlInputValues(){
   number_of_columns = number_of_columns_el.value;
   spacing = spacing_el.value;
   block_height = block_height_el.value;
@@ -340,6 +314,145 @@ function getControlValues(){
   block_colour = block_colour_el.value;
   background_colour = background_colour_el.value;
 };
+
+
+
+// Calculate Equal Spacing from Control Values
+function calculateEqualSpacing(){
+
+  // Calculate Columns Measurements
+  remaining_num_of_cols = number_of_columns - 1;
+  total_margin_spacing = remaining_num_of_cols * spacing;
+  remaining_width_after_margin = 100 - total_margin_spacing;
+  col_width = remaining_width_after_margin / number_of_columns;
+
+}
+
+
+
+// Update Block Height
+block_height_el.addEventListener('input', function(){
+
+  var blocks = preview_display.getElementsByTagName('span');
+  block_height = block_height_el.value;
+  preview_display.style.height = block_height + 'vh';
+
+  for (var i = 0, len = blocks.length; i < len; i++){
+    blocks[i].style.height = block_height + 'vh';
+  }
+
+});
+
+
+// Update Block Container Width
+container_width_el.addEventListener('input', function(){
+
+  var blocks_container = preview_display.firstChild;
+  blocks_container.style.width = parseInt(container_width_el.value) + '%';
+
+});
+
+
+// Update Block # of Columns
+number_of_columns_el.addEventListener('input', function(){
+
+  // Container Elements
+  var col_container_wrapper = preview_display;
+  var col_container = preview_display.firstChild;
+  var col;
+
+  getControlInputValues();
+  calculateEqualSpacing();
+
+  
+  col_container.innerHTML = '';
+
+  // Each Column
+  for (var i = 0, len = number_of_columns; i < len; i++){
+    col = document.createElement('span');
+    col.setAttribute('class','build-block');
+    col.style.background = block_colour;
+    col.style.width = col_width + '%';
+    col.style.marginLeft = spacing + '%';
+    col.style.height = (block_height) + 'vh';
+    
+    col_container.appendChild(col);
+  }
+
+});
+
+
+
+// Update Block Spacing
+spacing_el.addEventListener('input', function(){
+
+  var blocks_container = preview_display.firstChild;
+  var blocks = preview_display.getElementsByTagName('span');
+
+
+  getControlInputValues();
+  calculateEqualSpacing();
+
+  
+  blocks_container.style.width = parseInt(container_width_el.value) + '%';
+
+  for (var i = 0, len = blocks.length; i < len; i++){
+    blocks[i].style.marginLeft = spacing + '%';
+    blocks[i].style.width = col_width + '%';
+
+  }
+
+});
+
+
+
+// Update Block Colour
+block_colour_el.addEventListener('input', function(){
+
+  var blocks = preview_display.getElementsByTagName('span');
+  for (var i = 0, len = blocks.length; i < len; i++){
+    blocks[i].style.background = block_colour_el.value;
+  }
+
+});
+
+
+
+// Update Block Background Container Colour
+background_colour_el.addEventListener('input', function(){
+
+  preview_display.firstChild.style.background = background_colour_el.value;
+
+});
+
+
+
+// Invert Colours
+invert_colours_el.addEventListener('click', function(){
+
+  var block_colour = document.getElementById('block-colour').value;
+  var background_colour = document.getElementById('background-colour').value;
+
+  // Block Background Colour
+  background_colour_el.value = block_colour;
+  preview_display.firstChild.style.background = block_colour;
+
+  // Block Colour
+  block_colour_el.value = background_colour;
+  var blocks = preview_display.getElementsByTagName('span');
+  for (var i = 0, len = blocks.length; i < len; i++){
+    blocks[i].style.background = background_colour;
+  }
+
+});
+
+
+
+
+
+
+
+
 
 
 // Global Site Scan And Object/LocalStorage Creation
@@ -392,19 +505,32 @@ function scanAllAndSetCastleHistory(){
 function placeBlock(){
 
   // Get Values from Control Inputs
-  getControlValues();
+  getControlInputValues();
 
   // Clear Preview Display
+  // Reset the display block to display in case you were editing.
+  display = document.getElementById('display');
+  preview_display = document.getElementById('preview-display');
   preview_display.innerHTML = '';
+
+  // Get Values from Inputs
+  getControlInputValues();
 
   // Create Blocks
   calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, display);
 
-  // Reset the display block to display in case you were editing.
-  display = document.getElementById('display');
 
   // Scan and Update Local Storage
   scanAllAndSetCastleHistory();
+
+  // Set Preview Height to 5
+  block_height_el.value = 5;
+  block_height = 5;
+
+  // Create Blocks
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
+
+  preview_display = preview_display.firstChild;
 
 };
 
@@ -496,25 +622,40 @@ function removeActiveContainerClass(){
 
 
 function saveBlock(){
+
+  // Remove Active Container Class
   removeActiveContainerClass();
 
-  // Get Values from 
-  getControlValues();
-
+  
   // Reset Display and Preview containers
   display = document.getElementById('display');
+
+  // Clear Preview Display
   preview_display = document.getElementById('preview-display');
   preview_display.innerHTML = '';
+
+
+  // Get Values from Inputs
+  getControlInputValues();
+
+  // Set Preview Height to 5
+  block_height_el.value = 5;
+  block_height = 5;
+
+  // Create Blocks
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
 
   // Show Place Block, hide save block button.
   save_button_el.parentNode.style.display='none';
   place_button_el.parentNode.style.display = 'block';
 
   // Remove Fixed Class Controls Mobile
-  build_controls_container.classList.remove("fixed-controls")
+  build_controls_container.classList.remove("fixed-controls");
 
   // Update LocalStorage
   scanAllAndSetCastleHistory();
+
+  preview_display = preview_display.firstChild;
 
 };
 
@@ -531,6 +672,8 @@ function saveBlock(){
 // -------------------------- //
 // Build Blocks DOM Creation //
 // -------------------------- //
+// This is now mostly used from localstorage or url generation.
+
 
 // Column Creation and Math
 // Equal Spaced Equation
@@ -539,17 +682,19 @@ function saveBlock(){
 function calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, whole_container, render_events){
 
   // Make sure everything's a number
+  // Block Control Values
+
+// Make sure everything's a number
   container_width = parseInt(container_width);
   block_height = parseInt(block_height);
   number_of_columns = parseInt(number_of_columns);
   spacing = parseInt(spacing);
 
-
   // Calculate Columns Measurements
-  var remaining_num_of_cols = number_of_columns - 1;
-  var total_margin_spacing = remaining_num_of_cols * spacing;
-  var remaining_width_after_margin = 100 - total_margin_spacing;
-  var col_width = remaining_width_after_margin / number_of_columns;
+  remaining_num_of_cols = number_of_columns - 1;
+  total_margin_spacing = remaining_num_of_cols * spacing;
+  remaining_width_after_margin = 100 - total_margin_spacing;
+  col_width = remaining_width_after_margin / number_of_columns;
   
 
   // Container Elements
@@ -564,8 +709,7 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
 
 
   // Col Wrapper
-  col_container_wrapper.style.position = 'relative';
-  col_container_wrapper.style.width = '100%';
+  col_container_wrapper.setAttribute('class', 'block-section-container');
 
   
   // Col Container
@@ -578,20 +722,19 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   // Each Column
   for (var i = 0, len = number_of_columns; i < len; i++){
     col = document.createElement('span');
-    col.style.display = 'block';
+    col.setAttribute('class','build-block');
     col.style.background = block_colour;
     col.style.width = col_width + '%';
     col.style.marginLeft = spacing + '%';
-    col.style.float = 'left';
     col.style.height = (block_height) + 'vh';
     
     col_container.appendChild(col);
   }
 
 
-
+  // Edit Block if theres events.
   if (render_events !== 'no_events'){
-    // Edit
+    
     col_container.addEventListener('click', editBlock);
 
   }
@@ -600,10 +743,5 @@ function calculateAndBuildBlocks(container_width, block_height, number_of_column
   // Append It All
   col_container_wrapper.appendChild(col_container);
   whole_container.insertBefore(col_container_wrapper, whole_container.firstChild);
-  
-
-  // Remove First Column Margin 
-  var cols = col_container.getElementsByTagName('span');
-  cols[0].style.marginLeft = '0';
 
 };

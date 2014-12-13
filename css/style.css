@@ -186,6 +186,19 @@ textarea, #castle-history-url-string-container {
 .hash-iframe .preview-content, .hash-iframe .buildmode {
   display: none; }
 
+#preview-display {
+  background: #ececec; }
+
+.block-section-container {
+  position: relative;
+  width: 100%; }
+  .block-section-container .col-container .build-block:first-child {
+    margin-left: 0 !important; }
+
+.build-block {
+  display: block;
+  float: left; }
+
 @media screen and (max-width: 1020px) {
   .controls .col-container {
     margin: 2em 0; }
@@ -224,7 +237,6 @@ textarea, #castle-history-url-string-container {
     display: none; } }
 @media screen and (min-width: 1020px) {
   #display .col-container, #preview-display .col-container {
-    transition: all 0.3s ease;
     cursor: pointer; }
     #display .col-container:hover, #preview-display .col-container:hover {
       outline: 2px solid #53a7ea;
