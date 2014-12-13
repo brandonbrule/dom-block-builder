@@ -201,10 +201,8 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
   .clear-all-button{
     background: #aa0000;
     color:#fff;
-
-    @media screen and (min-width: $breakpoint-desktop){
-      display: none;
-    }
+    display:block;
+    width: 100%;
   }
 
 

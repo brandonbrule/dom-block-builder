@@ -104,10 +104,9 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 .clear-all-button {
   background: #aa0000;
-  color: #fff; }
-  @media screen and (min-width: 700px) {
-    .clear-all-button {
-      display: none; } }
+  color: #fff;
+  display: block;
+  width: 100%; }
 
 .col-container {
   margin: 1em auto; }

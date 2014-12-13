@@ -252,6 +252,8 @@ function rgbtohex(color){
 
 // Clear Everything, localstorage and playboard.
 function clearAll(){
+
+if (window.confirm("Do you really want to delete everything?  You're save points will stay saved, this will clear the board.")) { 
   display = document.getElementById('display');
   preview = document.getElementById('preview-display');
   display.innerHTML = '';
@@ -262,6 +264,8 @@ function clearAll(){
   localStorage.removeItem('CastleHistory');
   castle_history = [];
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
+}
+
 }
 
 
