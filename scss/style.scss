@@ -302,8 +302,8 @@ textarea, #castle-history-url-string-container{
 
 // If From Loaded
 .hash-iframe{
-  .preview-content, .buildmode{
-    display: none;
+  .preview-content, .buildmode, #preview-display{
+    display: none!important;
   }
 }
 

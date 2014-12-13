@@ -501,6 +501,17 @@ function scanAllAndSetCastleHistory(){
 // Block Set and Edit Controls   //
 // ----------------------------- //
 
+// Build Preview Window on load
+getControlInputValues();
+block_height_el.value = 5;
+block_height = 5;
+
+// Create Blocks
+calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
+preview_display = preview_display.firstChild;
+
+
+
 // Place Block Control
 function placeBlock(){
 

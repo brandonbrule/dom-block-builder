@@ -183,8 +183,8 @@ textarea, #castle-history-url-string-container {
 .hash #back-home {
   display: block; }
 
-.hash-iframe .preview-content, .hash-iframe .buildmode {
-  display: none; }
+.hash-iframe .preview-content, .hash-iframe .buildmode, .hash-iframe #preview-display {
+  display: none !important; }
 
 #preview-display {
   background: #ececec; }
