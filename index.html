@@ -74,6 +74,11 @@
     <div class="col-container">
       <input type="button" id="place-block" onclick="placeBlock()" value="Place Block">
     </div>
+
+    <div class="col-container" style="display:none">
+      <input type="button" id="insert-new-block" onclick="insertNewBlockAbove()" value="Insert New Block Above">
+    </div>
+
     <div class="col-container clear-all-container">
       <input class="clear-all-button" type="button" onclick="clearAll()" value="Clear All">
     </div>
@@ -94,8 +99,8 @@
 <div class="preview-content">
       <div id="stats-url-container" class="stats-url">
         <div class="col-container">
-          <label>Share Blocks - <a href="explore.html">Explore</a></label>
-          <input type="text" id="castle-history-url-string-container">
+          <label>Share Blocks - <a href="explore.html">Explore Gallery</a></label>
+          
         </div>
 
         <div class="col-container">
@@ -122,13 +127,21 @@
 
         <div id="iframe-history-container"></div>
 
-        <form  action="http://codepen.io/pen/define" method="POST" target="_blank">
+        <hr>
+
+        <p>Share URL - <a href="" id="castle-history-url-anchor" target="_blank">Click Here</a></p>
+
+        <input type="text" id="castle-history-url-string-container">
+
+        <hr>
+
+        <form style="position:absolute; top: 153px; right: 25px;"  action="http://codepen.io/pen/define" method="POST" target="_blank">
 
           <!-- We'll populate the value with the data to post to codepen here. -->
           <input id="data-input" type="hidden" name="data" value="">
 
           <!-- Fancy Pants CodePen Submit Button. -->
-          <input style="background-color: #222; padding: 0.5em;" type="image" src="http://s.cdpn.io/3/cp-arrow-right.svg" width="40" height="40" value="Create Pen" class="codepen-mover-button">
+          <input style="background-color: #222; float:right; padding: 0.15em 0 0.25em 0.25em; width: 30px; height: 30px;" type="image" src="http://s.cdpn.io/3/cp-arrow-right.svg" width="40" height="40" value="Create Pen" class="codepen-mover-button">
 
         </form>
 
@@ -137,7 +150,7 @@
       </div>
 
 
-<input style="display:none" class="clear-all-button" type="button" onclick="clearAll()" value="Delete Everything">
+<input style="" class="clear-all-button" type="button" onclick="clearAll()" value="Delete Everything">
 
 
   <script src='http://brandonbrule.github.io/itsa/js/itsa.js'></script>

@@ -58,7 +58,7 @@ html {
 
 
 
-$breakpoint-desktop : 1020px;
+$breakpoint-desktop : 700px;
 
 
 body{
@@ -201,6 +201,10 @@ textarea, #castle-history-url-string-container{
   .clear-all-button{
     background: #aa0000;
     color:#fff;
+
+    @media screen and (min-width: $breakpoint-desktop){
+      display: none;
+    }
   }
 
 
@@ -246,7 +250,7 @@ textarea, #castle-history-url-string-container{
   box-shadow: -1px 1px 4px 0px #666;
   width: 100%;
 
-  iframe{ width:100%;}
+  iframe{ width:100%; max-height: 200px;}
 
   label{display:block;}
   
@@ -292,7 +296,7 @@ textarea, #castle-history-url-string-container{
 
 // If From Hash
 .hash{
-  #iframe-history-container, #create-history-state-button{
+  #iframe-history-container, #create-history-state-button, #preview-display{
     display: none;
   }
   #back-home{

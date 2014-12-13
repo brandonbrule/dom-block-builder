@@ -41,7 +41,7 @@ textarea, #castle-history-url-string-container {
     display: none; } }
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.85); }
-  @media screen and (min-width: 1020px) {
+  @media screen and (min-width: 700px) {
     .buildmode, .controls {
       background: rgba(255, 255, 255, 0.95); } }
 
@@ -53,7 +53,7 @@ textarea, #castle-history-url-string-container {
   z-index: 200; }
   .buildmode input {
     float: right; }
-  @media screen and (min-width: 1020px) {
+  @media screen and (min-width: 700px) {
     .buildmode {
       width: 275px;
       z-index: 10;
@@ -64,7 +64,7 @@ textarea, #castle-history-url-string-container {
   list-style: none;
   padding: 0; }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 700px) {
   .fixed-controls {
     position: fixed;
     bottom: 0;
@@ -76,7 +76,7 @@ textarea, #castle-history-url-string-container {
   z-index: 10;
   width: 100%;
   z-index: 100; }
-  @media screen and (min-width: 1020px) {
+  @media screen and (min-width: 700px) {
     .controls {
       position: fixed;
       padding: 1.5rem;
@@ -105,6 +105,9 @@ textarea, #castle-history-url-string-container {
 .clear-all-button {
   background: #aa0000;
   color: #fff; }
+  @media screen and (min-width: 700px) {
+    .clear-all-button {
+      display: none; } }
 
 .col-container {
   margin: 1em auto; }
@@ -154,10 +157,11 @@ textarea, #castle-history-url-string-container {
   box-shadow: -1px 1px 4px 0px #666;
   width: 100%; }
   .stats-url iframe {
-    width: 100%; }
+    width: 100%;
+    max-height: 200px; }
   .stats-url label {
     display: block; }
-  @media screen and (min-width: 1020px) {
+  @media screen and (min-width: 700px) {
     .stats-url {
       position: absolute;
       opacity: 1;
@@ -178,7 +182,7 @@ textarea, #castle-history-url-string-container {
 #back-home {
   display: none; }
 
-.hash #iframe-history-container, .hash #create-history-state-button {
+.hash #iframe-history-container, .hash #create-history-state-button, .hash #preview-display {
   display: none; }
 .hash #back-home {
   display: block; }
@@ -199,7 +203,7 @@ textarea, #castle-history-url-string-container {
   display: block;
   float: left; }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 700px) {
   .controls .col-container {
     margin: 2em 0; }
 
@@ -235,7 +239,7 @@ textarea, #castle-history-url-string-container {
 
   .clear-all-container {
     display: none; } }
-@media screen and (min-width: 1020px) {
+@media screen and (min-width: 700px) {
   #display .col-container, #preview-display .col-container {
     cursor: pointer; }
     #display .col-container:hover, #preview-display .col-container:hover {

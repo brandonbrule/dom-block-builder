@@ -21,6 +21,7 @@ var background_colour_el = document.getElementById('background-colour');
 var invert_colours_el = document.getElementById('invert-colours');
 var save_button_el = document.getElementById('save-block');
 var place_button_el = document.getElementById('place-block');
+var insert_new_block_button_el = document.getElementById('insert-new-block');
 
 // Input Values for Calculations
 var number_of_columns;
@@ -56,6 +57,7 @@ var castle_history = [];
 // -------------------------- //
 // URL Stuff
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
+var castle_history_url_anchor = document.getElementById('castle-history-url-anchor');
 var castle_history_url_string;
 
 // If Local Storage Exists Load LocalStorage History
@@ -70,6 +72,7 @@ if (localStorage.getItem("CastleHistory") === null) {
 }
 // Append url as Hashtag
 castle_history_url_string = document.URL + '#' + castle_history_url_string;
+castle_history_url_anchor.setAttribute('href', castle_history_url_string);
 
 
 
@@ -502,14 +505,16 @@ function scanAllAndSetCastleHistory(){
 // ----------------------------- //
 
 // Build Preview Window on load
-getControlInputValues();
-block_height_el.value = 5;
-block_height = 5;
+function buildPreviewBlockOnLoad(){
+  getControlInputValues();
+  block_height_el.value = 5;
+  block_height = 5;
 
-// Create Blocks
-calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
-preview_display = preview_display.firstChild;
-
+  // Create Blocks
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, preview_display);
+  preview_display = preview_display.firstChild;
+}
+buildPreviewBlockOnLoad();
 
 
 // Place Block Control
@@ -546,7 +551,32 @@ function placeBlock(){
 };
 
 
+function insertNewBlockAbove(){
+  var active_blocks = document.getElementsByClassName('active-container')[0];
+  var duplicated_block_container = document.createElement('section');
 
+
+  duplicated_block_container.setAttribute('class', 'block-section-container');
+  active_blocks.parentNode.insertBefore(duplicated_block_container,active_blocks);
+
+  // Get Values from Inputs
+  getControlInputValues();
+
+  // Create Blocks
+  calculateAndBuildBlocks(container_width, block_height, number_of_columns, spacing, block_colour, background_colour, duplicated_block_container);
+
+  saveBlock();
+
+  preview_display = duplicated_block_container.firstChild;
+  preview_display.setAttribute('class', 'active-container');
+
+  save_button_el.parentNode.style.display = 'block';
+  insert_new_block_button_el.parentNode.style.display = 'block';
+  place_button_el.parentNode.style.display = 'none';
+
+
+
+}
 
 
 function editBlock(event){
@@ -591,7 +621,9 @@ function editBlock(event){
   preview_display = this.parentNode;
   display = this.parentNode;
   save_button_el.parentNode.style.display='block';
+  insert_new_block_button_el.parentNode.style.display='block';
   place_button_el.parentNode.style.display = 'none';
+
 
 
 
@@ -658,6 +690,7 @@ function saveBlock(){
 
   // Show Place Block, hide save block button.
   save_button_el.parentNode.style.display='none';
+  insert_new_block_button_el.parentNode.style.display = 'none';
   place_button_el.parentNode.style.display = 'block';
 
   // Remove Fixed Class Controls Mobile
