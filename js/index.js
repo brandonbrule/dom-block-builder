@@ -253,7 +253,7 @@ function rgbtohex(color){
 // Clear Everything, localstorage and playboard.
 function clearAll(){
 
-if (window.confirm("Do you really want to delete everything?  You're save points will stay saved, this will clear the board.")) { 
+if (window.confirm("Do you really want to delete everything?  You're save points will stay saved, this will clear all memory of the board.  You may want to create a save point before deleting everything.  Are you sure you want to delete everything?")) { 
   display = document.getElementById('display');
   preview = document.getElementById('preview-display');
   display.innerHTML = '';
