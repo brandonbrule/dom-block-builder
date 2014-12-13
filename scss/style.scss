@@ -294,7 +294,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 // If From Hash
 .hash{
-  #iframe-history-container, #create-history-state-button, #preview-display{
+  #iframe-history-container, #create-history-state-button, #preview-display, .codepen-form{
     display: none;
   }
   #back-home{
@@ -304,7 +304,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 // If From Loaded
 .hash-iframe{
-  .preview-content, .buildmode, #preview-display{
+  .preview-content, .buildmode, #preview-display, .codepen-form{
     display: none!important;
   }
 }

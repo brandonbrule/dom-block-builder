@@ -181,12 +181,12 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 #back-home {
   display: none; }
 
-.hash #iframe-history-container, .hash #create-history-state-button, .hash #preview-display {
+.hash #iframe-history-container, .hash #create-history-state-button, .hash #preview-display, .hash .codepen-form {
   display: none; }
 .hash #back-home {
   display: block; }
 
-.hash-iframe .preview-content, .hash-iframe .buildmode, .hash-iframe #preview-display {
+.hash-iframe .preview-content, .hash-iframe .buildmode, .hash-iframe #preview-display, .hash-iframe .codepen-form {
   display: none !important; }
 
 #preview-display {
