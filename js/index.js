@@ -57,8 +57,10 @@ var castle_history = [];
 // -------------------------- //
 // URL Stuff
 var castle_history_url_string_container = document.getElementById('castle-history-url-string-container');
+var castle_history_data_string_container = document.getElementById('castle-history-data-string-container');
 var castle_history_url_anchor = document.getElementById('castle-history-url-anchor');
 var castle_history_url_string;
+var castle_history_data_string;
 
 // If Local Storage Exists Load LocalStorage History
 
@@ -66,9 +68,11 @@ var castle_history_url_string;
 if (localStorage.getItem("CastleHistory") === null) {
   // Empty Object
   castle_history_url_string = encodeURIComponent(JSON.stringify(castle_history));
+  castle_history_data_string = encodeURIComponent(JSON.stringify(castle_history));
 } else {
   // Castle History From Local Storage
   castle_history_url_string = encodeURIComponent(localStorage.getItem('CastleHistory'));
+  castle_history_data_string = encodeURIComponent(localStorage.getItem('CastleHistory'));
 }
 // Append url as Hashtag
 castle_history_url_string = document.URL + '#' + castle_history_url_string;
@@ -135,6 +139,7 @@ function makeThisMyStartingPoint(){
 
 // Update URL TextArea
 castle_history_url_string_container.value = castle_history_url_string;
+castle_history_data_string_container.value = '#' + castle_history_data_string;
 castle_history_url_anchor.setAttribute('href', castle_history_url_string);
 
 
@@ -252,6 +257,7 @@ function clearAll(){
   display.innerHTML = '';
   preview_display.innerHTML = '';
   castle_history_url_string_container.value = '';
+  castle_history_data_string_container.value = '';
   castle_history_url_anchor.setAttribute('href', '');
   localStorage.removeItem('CastleHistory');
   castle_history = [];
@@ -483,6 +489,7 @@ function scanAllAndSetCastleHistory(){
   localStorage.setItem('CastleHistory', JSON.stringify(castle_history));
 
   castle_history_url_string_container.value = document.URL + '#' + encodeURIComponent(JSON.stringify(castle_history));
+  castle_history_data_string_container.value = '#' + encodeURIComponent(JSON.stringify(castle_history));
   castle_history_url_anchor.setAttribute('href', castle_history_url_string_container.value);
 
 

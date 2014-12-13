@@ -86,7 +86,7 @@ input[type='checkbox']{
   padding: 0.5em;
 }
 
-textarea, #castle-history-url-string-container{
+textarea, #castle-history-url-string-container, #castle-history-data-string-container{
   width: 100%;
 }
 
@@ -426,7 +426,7 @@ textarea, #castle-history-url-string-container{
   z-index:5;
   background: #fff;
   opacity: 0;
-  right:10px;
+  right:30%;
   background: rgb(170, 0, 0);
   border: none;
   color: #fff;
