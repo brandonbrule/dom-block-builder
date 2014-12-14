@@ -153,6 +153,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
   padding: 1.5rem;
   background: #fff;
   z-index: -1;
+  position: relative;
   box-shadow: -1px 1px 4px 0px #666;
   width: 100%; }
   .stats-url iframe {
