@@ -58,7 +58,7 @@ html {
 
 
 
-$breakpoint-desktop : 700px;
+$breakpoint-desktop : 990px;
 
 
 body{
@@ -140,7 +140,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 
 .fixed-controls{
-  @media screen and ( max-width: $breakpoint-desktop ){
+  @media screen and ( max-width: $breakpoint-desktop ) and (-webkit-min-device-pixel-ratio: 2) {
     position:fixed;
     bottom: 0;
     left:0;
@@ -340,7 +340,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 
 // Mobile
-@media screen and (max-width: $breakpoint-desktop){
+@media screen and (max-width: $breakpoint-desktop) and (-webkit-min-device-pixel-ratio: 2){
   .controls .col-container { margin: 2em 0;}
   hr{display: none;}
   label{ display: none; }
@@ -371,7 +371,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
     margin-top: 1em;
     margin-bottom: 1em;
   }
-  .clear-all-container{display: none;}
+
 
 }
 

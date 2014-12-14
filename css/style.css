@@ -41,7 +41,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
     display: none; } }
 .buildmode, .controls {
   background: rgba(255, 255, 255, 0.85); }
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 990px) {
     .buildmode, .controls {
       background: rgba(255, 255, 255, 0.95); } }
 
@@ -53,7 +53,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
   z-index: 200; }
   .buildmode input {
     float: right; }
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 990px) {
     .buildmode {
       width: 275px;
       z-index: 10;
@@ -64,7 +64,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
   list-style: none;
   padding: 0; }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 990px) and (-webkit-min-device-pixel-ratio: 2) {
   .fixed-controls {
     position: fixed;
     bottom: 0;
@@ -76,7 +76,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
   z-index: 10;
   width: 100%;
   z-index: 100; }
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 990px) {
     .controls {
       position: fixed;
       padding: 1.5rem;
@@ -160,7 +160,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
     max-height: 200px; }
   .stats-url label {
     display: block; }
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 990px) {
     .stats-url {
       position: absolute;
       opacity: 1;
@@ -202,7 +202,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
   display: block;
   float: left; }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 990px) and (-webkit-min-device-pixel-ratio: 2) {
   .controls .col-container {
     margin: 2em 0; }
 
@@ -234,11 +234,8 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
     padding: 2em;
     font-size: 2.5em;
     margin-top: 1em;
-    margin-bottom: 1em; }
-
-  .clear-all-container {
-    display: none; } }
-@media screen and (min-width: 700px) {
+    margin-bottom: 1em; } }
+@media screen and (min-width: 990px) {
   #display .col-container, #preview-display .col-container {
     cursor: pointer; }
     #display .col-container:hover, #preview-display .col-container:hover {
