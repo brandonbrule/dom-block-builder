@@ -170,6 +170,12 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
       left: 10px;
       width: 275px; } }
 
+.iframe-link {
+  padding: 1em;
+  display: block;
+  margin: 1em 0 0;
+  background: #53a7ea; }
+
 #group-display .col-container {
   margin: 0 auto; }
 

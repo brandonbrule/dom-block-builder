@@ -202,10 +202,7 @@ function displayHistoryFrames(){
 
   for (var i = 0; i < iframe_history_array.length; i++){
     anchor = document.createElement('a');
-    anchor.style.padding = '1em';
-    anchor.style.background = '#53a7ea';
-    anchor.style.display = 'block';
-    anchor.style.margin = '1em 0 0 0';
+    anchor.setAttribute('class', 'iframe-link');
     anchor.setAttribute('href', iframe_history_array[i]);
     anchor.setAttribute('target', '_blank');
     
@@ -233,17 +230,8 @@ function displayHistoryFrames(){
 
 // Convert RGB to HEX Return String with Hash
 function rgbtohex(color){
-  if (color.substr(0, 1) === '#') {
-        return color;
-    }
-    var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
-
-    var red = parseInt(digits[2]);
-    var green = parseInt(digits[3]);
-    var blue = parseInt(digits[4]);
-
-    var rgb = blue | (green << 8) | (red << 16);
-    return digits[1] + '#' + rgb.toString(16);
+  var m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(color);
+  return m ? '#' + (1 << 24 | m[1] << 16 | m[2] << 8 | m[3]).toString(16).substr(1) : color;
 }
 
 
