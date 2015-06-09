@@ -98,6 +98,7 @@ if(window.location.hash) {
  display.innerHTML = '';
  createCastleFromString(hash_to_array, 'no_events');
  build_controls_container.style.display = 'none';
+ stats_url_container.style.display = 'none';
 
 } else {
   var home_el = document.getElementById('back-home');

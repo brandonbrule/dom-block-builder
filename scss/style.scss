@@ -111,7 +111,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 
 .buildmode{
-  padding:1rem 1rem;
+  padding:0.15rem 1rem;
   position: fixed;
   top: 0;
   right: 1em;
@@ -138,7 +138,12 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 
 
 
-
+#starting-point-button{
+  width:100%;
+  background: none;
+  cursor: pointer;
+  border: none;
+}
 .fixed-controls{
   @media screen and ( max-width: $breakpoint-desktop ) and (-webkit-min-device-pixel-ratio: 2) {
     position:fixed;

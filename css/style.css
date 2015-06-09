@@ -46,7 +46,7 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
       background: rgba(255, 255, 255, 0.95); } }
 
 .buildmode {
-  padding: 1rem 1rem;
+  padding: 0.15rem 1rem;
   position: fixed;
   top: 0;
   right: 1em;
@@ -63,6 +63,12 @@ textarea, #castle-history-url-string-container, #castle-history-data-string-cont
 #stats-container {
   list-style: none;
   padding: 0; }
+
+#starting-point-button {
+  width: 100%;
+  background: none;
+  cursor: pointer;
+  border: none; }
 
 @media screen and (max-width: 990px) and (-webkit-min-device-pixel-ratio: 2) {
   .fixed-controls {
